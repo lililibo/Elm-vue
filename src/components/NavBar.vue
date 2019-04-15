@@ -1,30 +1,24 @@
 <template>
   <div class="footer">
     <ul>
-      <li>
-        <a href="#" class="footer-active">
-          <i class="iconfont icon-changyonglogo40"></i>首页
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="iconfont icon-faxian"></i>发现
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="iconfont icon-dingdan"></i>订单
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="iconfont icon-profile"></i>我的
-        </a>
+      <li v-for="(tab,index) in tabs" :key="index">
+        <router-link :to="tab.href" active-class="footer-active">
+          <i :class="['iconfont', tab.icon]"></i>{{ tab.name }}
+        </router-link>
       </li>
     </ul>
   </div>
 </template>
 
+<script>
+export default {
+  props: {
+    tabs: {
+      type: Array
+    }
+  }
+}
+</script>
 <style>
 /* 底部 */
 .footer {
