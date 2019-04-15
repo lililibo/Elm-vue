@@ -1,5 +1,12 @@
 <template>
-  <div>
-    这是主页
-  </div>
+  <Metop></Metop>
 </template>
+
+<script>
+import Metop from '../components/Metop'
+export default {
+  components: {
+    Metop
+  }
+};
+</script>
