@@ -36,7 +36,6 @@ export default {
           el: '.swiper-pagination'
         }
       })  
-      console.log(1)
   }
   
 };

@@ -19,11 +19,15 @@ export default new VueRouter({
       {
         path: 'profile', component: () => import('./views/Profile.vue')
       },
+      
       { path: '', redirect: '/me' }
      ]
    },
    {
     path: '/login', component: () => import('./views/Login.vue')
+    },
+    {
+      path: '/profile/info', component: () => import('./views/Info.vue')
     },
     {
       path: '/register', component: () => import('./views/Register.vue')
