@@ -19,7 +19,10 @@ export default new VueRouter({
       {
         path: 'profile', component: () => import('./views/Profile.vue')
       },
-      
+      {
+        path: 'city', component: () => import('./views/city.vue')
+      },
+
       { path: '', redirect: '/me' }
      ]
    },

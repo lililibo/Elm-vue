@@ -3,10 +3,10 @@
     <!-- 头部 -->
     <div id="header">
       <div class="adderss">
-        <a href="#">
+        <router-link to="/city">
           <i class="iconfont icon-dingwei"></i> 袋鼠公寓
           <i class="iconfont icon-xiajiantou"></i>
-        </a>
+        </router-link>
       </div>
       <div class="search">
         <a href="#">
