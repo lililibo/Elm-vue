@@ -15,7 +15,7 @@
       </div>
     </div>
     <!-- 导航 -->
-    <div class="banner">
+    <!-- <div class="banner">
       <ul>
         <li>
           <a href="#">
@@ -102,7 +102,8 @@
         <span class="banner_b_active"></span>
         <span></span>
       </div>
-    </div>
+    </div> -->
+    <Banner :bannerList1="bannerList1" :bannerList2="bannerList2"></Banner>
     <!-- 推荐 -->
     <div class="groom">
       <div class="groom_l">
@@ -176,7 +177,7 @@
                 <span>品牌</span>
                 <span>尊宝比萨 （黄田店）</span>
               </h3>
-              <span>···</span>
+              <span>口···</span>
             </div>
             <div class="seller_t_r2">
               <span>☆ ☆ ☆ ☆ ☆</span>
@@ -224,9 +225,34 @@
 
 <script>
 import Carousel from './Carousel'
+import Banner from './Banner'
+import axios from 'axios'
 export default {
+  data() {
+    return {
+      bannerList1: [],
+      bannerList2: []
+    }
+  },
   components: {
-    Carousel
+    Carousel,
+    Banner
+  },
+  methods: {
+    getBannerList () {
+      axios.get('/json/banner.json').then(res => {
+        let data = res.data
+        for(var i = 0; i < 10; i++){
+          this.bannerList1.push(data[i])
+        }
+        for(var j=10; j<20; j++){
+          this.bannerList2.push(data[j])
+        }
+      })
+    }
+  },
+  created() {
+    this.getBannerList()
   }
 }
 </script>
