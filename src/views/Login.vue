@@ -47,7 +47,7 @@ export default {
           password:this.password
         }
       }).then(function(res){
-        console.log(res.data);
+        //console.log(res.data);
         if(res.data.code==0){
           _this.$router.push("/profile");
           localStorage.setItem("username",res.data.username);
