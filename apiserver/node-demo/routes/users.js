@@ -43,7 +43,8 @@ router.get("/login", function (req, res, next) {
             code:0,
             msg:"登陆成功",
             phone:data.phone,
-            username:data.username
+            username:data.username,
+            password:data.password
           })
         }else{
           console.log("密码不正确");
