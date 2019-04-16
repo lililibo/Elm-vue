@@ -59,7 +59,7 @@ export default {
       }).then(function(res){
         //console.log(res,tata);
         if(res.data.code==0){
-          _this.$router.push("/login")
+          _this.$router.replace("/login")
         }else{
           alert(res.data.msg);
         }

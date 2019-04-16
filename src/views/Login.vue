@@ -49,7 +49,7 @@ export default {
       }).then(function(res){
         //console.log(res.data);
         if(res.data.code==0){
-          _this.$router.push("/profile");
+          _this.$router.go(-1);
           localStorage.setItem("username",res.data.username);
           localStorage.setItem("phone",res.data.phone);
           localStorage.setItem("password",res.data.password);
