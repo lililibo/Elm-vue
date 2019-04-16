@@ -84,5 +84,35 @@ router.get("/login", function (req, res, next) {
     });
 });
 
+//对localStorage的username进行验证http://localhost:3000/users/usernameyz
+router.get("/usernameyz", function (req, res, next) {
+  var username = req.query.username;
+  usermodel.findOne({
+    username: username
+  })
+    .then(function (data) {
+      console.log(data);
+      if (data) {
+        console.log("用户名存在");
+        res.send({
+          code:0,
+          msg:"用户名存在"
+        })
+      } else {
+        console.log("用户名不存在");
+        res.send({
+          code:-1,
+          msg:"用户名不存在"
+        })
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+      res.send({
+        code: -2,
+        msg: "校验用户名失败"
+      });
+    });
+});
 module.exports = router;
 
