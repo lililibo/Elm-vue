@@ -21,8 +21,13 @@ export default new VueRouter({
       },
       { path: '', redirect: '/me' }
      ]
-     
    },
+   {
+    path: '/login', component: () => import('./views/Login.vue')
+    },
+    {
+      path: '/register', component: () => import('./views/Register.vue')
+      },
    { path: '*', redirect: '/me' }
   ]
 })

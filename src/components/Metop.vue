@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="metoptotal">
     <!-- 头部 -->
     <div id="header">
       <div class="adderss">
@@ -129,12 +129,13 @@
         </div>
       </a>
     </div>
-    <!-- 轮播 -->
+    <Carousel></Carousel>
+    <!-- 轮播
     <div class="Carousel">
       <img
         src="https://fuss10.elemecdn.com/7/05/bb01f6e34c18a0e12d39b7c98e6f6jpeg.jpeg?imageMogr/format/webp/thumbnail/568x/"
       >
-    </div>
+    </div> -->
     <!-- 商家列表 -->
     <div class="list">
       <div class="list_t">
@@ -221,10 +222,21 @@
   </div>
 </template>
 
+<script>
+import Carousel from '../components/Carousel'
+export default {
+  components: {
+    Carousel
+  }
+}
+</script>
 <style>
 /* 头部 */
 .iconfont {
   font-size: 0.16rem !important;
+}
+.metoptotal{
+  background: white;
 }
 #header {
   height: 0.96rem;
@@ -257,6 +269,7 @@
 /* 导航 */
 .banner {
   height: 1.68rem;
+  background: white;
 }
 .banner ul {
   display: flex;
@@ -341,7 +354,7 @@
   color: #d9b365;
 }
 /* 轮播 */
-.Carousel {
+/* .Carousel {
   width: 3.55rem;
   height: 0.9rem;
   margin: 0.05rem 0.1rem 0.08rem;
@@ -349,7 +362,7 @@
 .Carousel img {
   width: 100%;
   height: 100%;
-}
+} */
 /* 商家列表 */
 .list {
   margin-bottom: 0.52rem;
