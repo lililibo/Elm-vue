@@ -4,7 +4,7 @@
     <div id="header">
       <div class="adderss">
         <router-link to="/city">
-          <i class="iconfont icon-dingwei"></i> 袋鼠公寓
+          <i class="iconfont icon-dingwei"></i> <span>定位失败</span>
           <i class="iconfont icon-xiajiantou"></i>
         </router-link>
       </div>
@@ -15,94 +15,6 @@
       </div>
     </div>
     <!-- 导航 -->
-    <!-- <div class="banner">
-      <ul>
-        <li>
-          <a href="#">
-            <img
-              src="https://fuss10.elemecdn.com/7/d8/a867c870b22bc74c87c348b75528djpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/"
-            >
-            美食
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <img
-              src="https://fuss10.elemecdn.com/7/d8/a867c870b22bc74c87c348b75528djpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/"
-            >
-            美食
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <img
-              src="https://fuss10.elemecdn.com/7/d8/a867c870b22bc74c87c348b75528djpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/"
-            >
-            美食
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <img
-              src="https://fuss10.elemecdn.com/7/d8/a867c870b22bc74c87c348b75528djpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/"
-            >
-            美食
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <img
-              src="https://fuss10.elemecdn.com/7/d8/a867c870b22bc74c87c348b75528djpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/"
-            >
-            美食
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <img
-              src="https://fuss10.elemecdn.com/7/d8/a867c870b22bc74c87c348b75528djpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/"
-            >
-            美食
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <img
-              src="https://fuss10.elemecdn.com/7/d8/a867c870b22bc74c87c348b75528djpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/"
-            >
-            美食
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <img
-              src="https://fuss10.elemecdn.com/7/d8/a867c870b22bc74c87c348b75528djpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/"
-            >
-            美食
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <img
-              src="https://fuss10.elemecdn.com/7/d8/a867c870b22bc74c87c348b75528djpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/"
-            >
-            美食
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <img
-              src="https://fuss10.elemecdn.com/7/d8/a867c870b22bc74c87c348b75528djpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/"
-            >
-            美食
-          </a>
-        </li>
-      </ul>
-      <div class="banner_b">
-        <span class="banner_b_active"></span>
-        <span></span>
-      </div>
-    </div> -->
     <Banner :bannerList1="bannerList1" :bannerList2="bannerList2"></Banner>
     <!-- 推荐 -->
     <div class="groom">
@@ -130,14 +42,10 @@
         </div>
       </a>
     </div>
+    <!-- 轮播-->
     <Carousel></Carousel>
-    <!-- 轮播
-    <div class="carousel">
-      <img
-        src="https://fuss10.elemecdn.com/7/05/bb01f6e34c18a0e12d39b7c98e6f6jpeg.jpeg?imageMogr/format/webp/thumbnail/568x/"
-      >
-    </div> -->
     <!-- 商家列表 -->
+
     <div class="list">
       <div class="list_t">
         <span></span>&nbsp;&nbsp;&nbsp;&nbsp;推荐商家&nbsp;&nbsp;&nbsp;&nbsp;
@@ -160,13 +68,19 @@
           <li>
             <a href="#">
               筛选
-              <i class="iconfont icon-shaixuan"></i>
+              <i class="iconfont icon-loudou"></i>
             </a>
           </li>
         </ul>
       </div>
 
-      <div class="list_b">
+      <section class="lblist_b" v-if="username==''">
+      <img src="//fuss10.elemecdn.com/d/60/70008646170d1f654e926a2aaa3afpng.png">
+      <p>没有结果</p>
+      <h3>登陆后查看更多商家</h3>
+      <router-link to="/login" class="login">立即登陆</router-link>
+      </section>
+      <div class="list_b" v-else>
         <div class="seller_t">
           <img
             src="https://fuss10.elemecdn.com/4/ee/15627ce26bf60533e459b0299c9edpng.png?imageMogr/format/webp/thumbnail/!130x130r/gravity/Center/crop/130x130/"
@@ -220,6 +134,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -231,7 +146,8 @@ export default {
   data() {
     return {
       bannerList1: [],
-      bannerList2: []
+      bannerList2: [],
+      username: ''
     }
   },
   components: {
@@ -239,6 +155,7 @@ export default {
     Banner
   },
   methods: {
+    //得到导航的列表
     getBannerList () {
       axios.get('/json/banner.json').then(res => {
         let data = res.data
@@ -249,7 +166,16 @@ export default {
           this.bannerList2.push(data[j])
         }
       })
+    },
+    //得到localStorage中的username
+    gitUsername () {
+      if(localStorage.getItem("username")){
+        this.username = username
+      }
     }
+  },
+  activated() {
+    this.gitUsername()
   },
   created() {
     this.getBannerList()
@@ -379,16 +305,6 @@ export default {
 .icon-huangguan {
   color: #d9b365;
 }
-/* 轮播 */
-/* .carousel {
-  width: 3.55rem;
-  height: 0.9rem;
-  margin: 0.05rem 0.1rem 0.08rem;
-}
-.carousel img {
-  width: 100%;
-  height: 100%;
-} */
 /* 商家列表 */
 .list {
   margin-bottom: 0.52rem;
@@ -415,6 +331,33 @@ export default {
 }
 .list_c_active {
   font-weight: bold;
+}
+.lblist_b{
+  height: 3.15rem;
+  background: white;
+  text-align: center;
+  margin-top: .4rem;
+}
+.lblist_b img{
+  width: 2rem;
+  height: 2rem;
+}
+.lblist_b p{
+  font-size: .2rem;
+  color: #6a6a6a;
+}
+.lblist_b h3{
+  margin-bottom: .15rem;
+}
+.login {
+  padding: 2.666667vw;
+  min-width: 32vw;
+  border: none;
+  border-radius: 0.533333vw;
+  background-color: #56d176;
+  color: #fff;
+  text-align: center;
+  font-size: 0.14rem;
 }
 .list_b {
   height: 1.77rem;

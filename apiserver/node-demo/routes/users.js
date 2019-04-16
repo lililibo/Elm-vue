@@ -7,24 +7,38 @@ const usermodel = require("../models/usermodel.js");
 router.get('/register', function (req, res, next) {
   var username = req.query.username;
   var password = req.query.password;
-  var phone=req.query.phone;
-  //保存数据
-  var user = new usermodel({
-    username: username,
-    password: password,
-    phone:phone
-  });
-  user.save()
-    .then(function () {
-      console.log("注册成功");
+  var phone = req.query.phone;
+  //用户名唯一验证
+  usermodel.findOne({
+    username: username
+  }).then(function (data) {
+    console.log(data);
+    if (data) {
+      console.log("用户名已经存在");
       res.send({
-        code: 0,
-        msg: "注册成功"
+        code: -3,
+        msg: "用户名已经存在"
       })
-    })
-    .catch(function (error) {
-      console.log("注册失败");
-    })
+    } else {
+      //保存数据
+      var user = new usermodel({
+        username: username,
+        password: password,
+        phone: phone
+      });
+      user.save()
+        .then(function () {
+          console.log("注册成功");
+          res.send({
+            code: 0,
+            msg: "注册成功"
+          })
+        })
+        .catch(function (error) {
+          console.log("注册失败");
+        })
+    }
+  })
 });
 //登陆http://localhost:3000/users/login
 router.get("/login", function (req, res, next) {
@@ -37,27 +51,27 @@ router.get("/login", function (req, res, next) {
       console.log(data);
       if (data) {
         console.log("用户名存在");
-        if(password==data.password){
+        if (password == data.password) {
           console.log("登陆成功");
           res.send({
-            code:0,
-            msg:"登陆成功",
-            phone:data.phone,
-            username:data.username,
-            password:data.password
+            code: 0,
+            msg: "登陆成功",
+            phone: data.phone,
+            username: data.username,
+            password: data.password
           })
-        }else{
+        } else {
           console.log("密码不正确");
           res.send({
-            code:-3,
-            msg:"密码不正确"
+            code: -3,
+            msg: "密码不正确"
           })
         }
-      }else{
+      } else {
         console.log("用户名不存在");
         res.send({
-          code:-2,
-          msg:"用户名不存在"
+          code: -2,
+          msg: "用户名不存在"
         })
       }
     })
@@ -70,5 +84,35 @@ router.get("/login", function (req, res, next) {
     });
 });
 
+//对localStorage的username进行验证http://localhost:3000/users/usernameyz
+router.get("/usernameyz", function (req, res, next) {
+  var username = req.query.username;
+  usermodel.findOne({
+    username: username
+  })
+    .then(function (data) {
+      console.log(data);
+      if (data) {
+        console.log("用户名存在");
+        res.send({
+          code:0,
+          msg:"用户名存在"
+        })
+      } else {
+        console.log("用户名不存在");
+        res.send({
+          code:-1,
+          msg:"用户名不存在"
+        })
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+      res.send({
+        code: -2,
+        msg: "校验用户名失败"
+      });
+    });
+});
 module.exports = router;
 
