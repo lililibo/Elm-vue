@@ -37,6 +37,9 @@ export default {
         if (localStorage.getItem("username")) {
           var username = localStorage.getItem("username");
           this.username = username;
+        }else{
+          this.username ='';
+          this.seeNormal=true;
         }
       }
     },

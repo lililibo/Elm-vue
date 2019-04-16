@@ -121,6 +121,8 @@ export default {
         if(localStorage.getItem("username")){
           var username=localStorage.getItem("username");
           this.username=username;
+        }else{
+          this.username='';
         }
         if(localStorage.getItem("phone")){
           var phone=localStorage.getItem("phone");
@@ -128,6 +130,8 @@ export default {
           var myphone = phone.substr(3, 4);
           var lphone = phone.replace(myphone, "****");
           this.phone=lphone;
+        }else{
+          this.phone='';
         }
       }
     },
