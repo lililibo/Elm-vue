@@ -20,7 +20,7 @@
       </div>
     </router-link>
     <!-- 登陆了 -->
-    <router-link to="/info" v-else>
+    <router-link to="/profile/info" v-else>
       <div class="profile-3g0uv">
         <div class="index-18Ili">
           <span></span>
