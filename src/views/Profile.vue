@@ -41,15 +41,15 @@
     <div class="index-1G7HV">
       <a href="#" class="index-1ryAh">
         <p>
-          <span class="index-2FmrF" style="color: rgb(255, 95, 62);">0</span><span class="index-2V-Hh"
-            style="color: rgb(255, 95, 62);">个</span>
+          <span class="index-2FmrF" style="color: rgb(255, 95, 62);">0</span>
+          <span class="index-2V-Hh" style="color: rgb(255, 95, 62);">个</span>
         </p>
         <p class="index-3S6cZ">红包</p>
       </a>
       <a href="#" class="index-1ryAh">
         <p>
-          <span class="index-2FmrF" style="color: rgb(106, 194, 11);">0</span><span class="index-2V-Hh"
-            style="color: rgb(106, 194, 11);">个</span>
+          <span class="index-2FmrF" style="color: rgb(106, 194, 11);">0</span>
+          <span class="index-2V-Hh" style="color: rgb(106, 194, 11);">个</span>
         </p>
         <p class="index-3S6cZ">金币</p>
       </a>
@@ -58,7 +58,8 @@
     <section class="profile-1reTe">
       <a href="#" class="index-2MEEn">
         <i class="iconfont icon-dizhi" style="color:rgb(74, 165, 240);"></i>
-        <div class="index-yydpu">我的地址
+        <div class="index-yydpu">
+          我的地址
           <i class="iconfont icon-right"></i>
         </div>
       </a>
@@ -67,13 +68,15 @@
     <section class="profile-1reTe">
       <a href="#" class="index-2MEEn">
         <i class="iconfont icon-shangcheng" style="color:rgb(148, 217, 74)"></i>
-        <div class="index-yydpu">金币商城
+        <div class="index-yydpu">
+          金币商城
           <i class="iconfont icon-right"></i>
         </div>
       </a>
       <a href="#" class="index-2MEEn">
         <i class="iconfont icon-liwu" style="color:rgb(252, 123, 83)"></i>
-        <div class="index-yydpu">分享拿10元现金
+        <div class="index-yydpu">
+          分享拿10元现金
           <i class="iconfont icon-right"></i>
         </div>
       </a>
@@ -82,19 +85,22 @@
     <section class="profile-1reTe">
       <a href="#" class="index-2MEEn">
         <i class="iconfont icon-erji" style="color:rgb(74, 165, 240)"></i>
-        <div class="index-yydpu">我的客服
+        <div class="index-yydpu">
+          我的客服
           <i class="iconfont icon-right"></i>
         </div>
       </a>
       <a href="#" class="index-2MEEn">
         <i class="iconfont icon-eliaomo" style="color:rgb(74, 165, 240)"></i>
-        <div class="index-yydpu">下载饿了么APP
+        <div class="index-yydpu">
+          下载饿了么APP
           <i class="iconfont icon-right"></i>
         </div>
       </a>
       <a href="#" class="index-2MEEn">
         <i class="iconfont icon-guize" style="color:rgb(74, 165, 240)"></i>
-        <div class="index-yydpu">规则中心
+        <div class="index-yydpu">
+          规则中心
           <i class="iconfont icon-right"></i>
         </div>
       </a>
@@ -102,39 +108,58 @@
     <!-- 隐私政策 -->
     <div class="profile-2dyk_">
       <a
-        href="//h5.ele.me/service/agreement/#HEAEDER_SHOW=1&initTitle=%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96&key=ruleQue50">隐私政策</a>
+        href="//h5.ele.me/service/agreement/#HEAEDER_SHOW=1&initTitle=%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96&key=ruleQue50"
+      >隐私政策</a>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
-      username:'',
-      phone:''
-    }
+      username: "",
+      phone: ""
+    };
   },
   methods: {
-    isLogin: function(){
-      if(localStorage){
-        if(localStorage.getItem("username")){
-          var username=localStorage.getItem("username");
-          this.username=username;
-        }else{
-          this.username='';
-        }
-        if(localStorage.getItem("phone")){
-          var phone=localStorage.getItem("phone");
-          //隐藏电话号码的中间4位
-          var myphone = phone.substr(3, 4);
-          var lphone = phone.replace(myphone, "****");
-          this.phone=lphone;
-        }else{
-          this.phone='';
+    isLogin: function() {
+      if (localStorage) {
+        if (localStorage.getItem("username")) {
+          var username = localStorage.getItem("username");
+          var _this = this;
+          //对username进行验证
+          axios
+            .get("http://localhost:3000/users/usernameyz", {
+              params: {
+                username: username
+              }
+            })
+            .then(function(res) {
+              //console.log(res.data);
+              if (res.data.code == 0) {
+                _this.username = username;
+                var phone = localStorage.getItem("phone");
+                //隐藏电话号码的中间4位
+                var myphone = phone.substr(3, 4);
+                var lphone = phone.replace(myphone, "****");
+                _this.phone = lphone;
+              } else if(res.data.code==-1) {
+                //console.log(res.data.msg);
+                _this.username = "";
+                _this.phone = "";
+              }
+            })
+            .catch(function(err) {
+              alert(err);
+            });
+        } else {
+          this.username = "";
+          this.phone="";
         }
       }
-    },
+    }
   },
   activated() {
     this.isLogin();
@@ -142,41 +167,41 @@ export default {
   // mounted() {
   //   this.isLogin();
   // },
-}
+};
 </script>
 
 
 <style>
-  /* 头部 */
-body{
+/* 头部 */
+body {
   background-color: #f5f5f5;
 }
-a{
+a {
   text-decoration: none;
   cursor: pointer;
 }
-.profile-3g0uv{
-  height: 1.1rem; 
+.profile-3g0uv {
+  height: 1.1rem;
   display: flex;
-  background-image: linear-gradient(90deg,#0af,#0085ff);
+  background-image: linear-gradient(90deg, #0af, #0085ff);
   padding: 6.666667vw 4vw;
   align-items: center;
 }
-.profile-3g0uv .index-18Ili{
-  width: .6rem;
-  height: .6rem;
+.profile-3g0uv .index-18Ili {
+  width: 0.6rem;
+  height: 0.6rem;
   border-radius: 50%;
 }
 .profile-3g0uv .index-18Ili span {
   display: block;
-  width: .6rem;
-  height: .6rem;
+  width: 0.6rem;
+  height: 0.6rem;
   border-radius: 50%;
   background-position: 0px 2.4rem;
-  background-size: .6rem;
+  background-size: 0.6rem;
   background: url(//shadow.elemecdn.com/faas/h5/static/sprite.3ffb5d8.png);
 }
-.profile-3g0uv .profile-xfCcC{
+.profile-3g0uv .profile-xfCcC {
   overflow: hidden;
   margin-left: 4.8vw;
   flex-grow: 1;
@@ -186,79 +211,79 @@ a{
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.profile-3g0uv .profile-xfCcC .profile-1_mtk{
-  font-size: .2rem;
+.profile-3g0uv .profile-xfCcC .profile-1_mtk {
+  font-size: 0.2rem;
   font-weight: bold;
   color: #fff;
   margin-bottom: 1.065vw;
   display: flex;
   align-items: center;
 }
-.profile-3g0uv .profile-xfCcC .profile-1UP72{
-  font-size: .12rem;
+.profile-3g0uv .profile-xfCcC .profile-1UP72 {
+  font-size: 0.12rem;
   color: #fff;
   display: flex;
   align-items: center;
 }
-.profile-1UP72 .icon-shouji{  
-  font-size: .12rem;
+.profile-1UP72 .icon-shouji {
+  font-size: 0.12rem;
 }
-.profile-3g0uv .profile-2XuMq{
+.profile-3g0uv .profile-2XuMq {
   color: #fff;
-  font-size: .12rem;
+  font-size: 0.12rem;
 }
 /* 红包金币 */
-.index-1G7HV{
+.index-1G7HV {
   width: 100%;
-  height: .84rem;
+  height: 0.84rem;
   display: table;
   border-bottom: 1px solid #ddd;
   background-color: #fff;
 }
-.index-1G7HV .index-1ryAh{
+.index-1G7HV .index-1ryAh {
   display: table-cell;
   width: 33.333%;
   vertical-align: middle;
   text-align: center;
 }
-.index-1G7HV>a:nth-child(1){
+.index-1G7HV > a:nth-child(1) {
   border-right: 1px solid #ddd;
   display: table-cell;
 }
-.index-1G7HV .index-2FmrF{
-  font-size: .22rem;
+.index-1G7HV .index-2FmrF {
+  font-size: 0.22rem;
   line-height: 6.933333vw;
   font-weight: 700;
 }
-.index-1G7HV .index-3S6cZ{
+.index-1G7HV .index-3S6cZ {
   margin-top: 1.333333vw;
-  font-size: .12rem;
+  font-size: 0.12rem;
   line-height: 3.733333vw;
   color: #666;
   font-weight: 700;
 }
 /* 我的地址 */
-.profile-1reTe{
+.profile-1reTe {
   margin-top: 2.666667vw;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  font-size: .05rem;
-  line-height: .45rem;
+  font-size: 0.05rem;
+  line-height: 0.45rem;
   background: #fff;
 }
-.profile-1reTe .index-2MEEn{
-  font-size: .16rem;
+.profile-1reTe .index-2MEEn {
+  font-size: 0.16rem;
   color: #333;
   display: flex;
   align-items: center;
-  padding-left: .12rem;
+  padding-left: 0.12rem;
 }
-.profile-1reTe .index-2MEEn .iconfont{
-  font-size: .2rem;
+.profile-1reTe .index-2MEEn .iconfont {
+  font-size: 0.2rem;
   margin-right: 2.667vw;
 }
-.profile-1reTe .index-2MEEn .index-yydpu{
-  margin-right: .05rem;
+.profile-1reTe .index-2MEEn .index-yydpu {
+  margin-right: 0.05rem;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -266,20 +291,20 @@ a{
 .index-2MEEn:not(:last-child) .index-yydpu {
   border-bottom: 1px solid #eee;
 }
-.profile-1reTe .index-2MEEn .icon-right{
-	font-size: .12rem;
-	margin-right: 1vw;
+.profile-1reTe .index-2MEEn .icon-right {
+  font-size: 0.12rem;
+  margin-right: 1vw;
   color: #bbb;
-} 
-/* 隐私政策 */
-.profile-2dyk_{
-  text-align: center;
-  margin: .613333rem auto;
-  margin: 6.133333vw auto;
-  color:#4da6f0;
-  font-size: .16rem;
 }
-.profile-2dyk_>a {
+/* 隐私政策 */
+.profile-2dyk_ {
+  text-align: center;
+  margin: 0.613333rem auto;
+  margin: 6.133333vw auto;
+  color: #4da6f0;
+  font-size: 0.16rem;
+}
+.profile-2dyk_ > a {
   outline: none;
   color: inherit;
 }
