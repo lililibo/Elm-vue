@@ -158,10 +158,6 @@ body {
 .main-2cJz_ {
   color: #666;
 }
-.icon-shouji {
-  font-size: 0.2rem;
-  color: #0097ff;
-}
 /* 登陆按钮 */
 .main-aGw6s {
   display: block;
