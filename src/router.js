@@ -8,16 +8,16 @@ export default new VueRouter({
      component: () => import('./views/Home.vue'),
      children: [
        {
-         path: 'me', component: () => import('./views/Me.vue')
+         path: 'me', component: () => import('./views/Me.vue'),meta:{title:'饿了么'}
        },
        {
-        path: 'discover', component: () => import('./views/Discover.vue')
+        path: 'discover', component: () => import('./views/Discover.vue'),meta:{title:'发现'}
       },
       {
-        path: 'order', component: () => import('./views/Order.vue')
+        path: 'order', component: () => import('./views/Order.vue'),meta:{title:'我的订单'}
       },
       {
-        path: 'profile', component: () => import('./views/Profile.vue')
+        path: 'profile', component: () => import('./views/Profile.vue'),meta:{title:'我的'}
       },
       {
         path: 'city', component: () => import('./views/city.vue')
@@ -27,13 +27,13 @@ export default new VueRouter({
      ]
    },
    {
-    path: '/login', component: () => import('./views/Login.vue')
+    path: '/login', component: () => import('./views/Login.vue'),meta:{title:'登陆'}
     },
     {
       path: '/profile/info', component: () => import('./views/Info.vue')
     },
     {
-      path: '/register', component: () => import('./views/Register.vue')
+      path: '/register', component: () => import('./views/Register.vue'),meta:{title:'注册'}
       },
    { path: '*', redirect: '/me' }
   ]

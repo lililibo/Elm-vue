@@ -12,7 +12,8 @@
     "core-js": "^2.6.5",
     "swiper": "^4.5.0",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.4"
+    "vue-router": "^3.0.4",
+    "vue-wechat-title": "^2.0.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.6.0",
