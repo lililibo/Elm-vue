@@ -1,6 +1,8 @@
 <template>
   <div id="home">
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <NavBar :tabs="tabs"></NavBar>
   </div>
 </template>

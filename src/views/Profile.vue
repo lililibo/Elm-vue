@@ -1,23 +1,42 @@
 <template>
   <div class="profile-1vcJW">
     <!-- 头部 -->
-    <section>
+    <!-- 未登陆 -->
+    <router-link to="/login" v-if="username==''">
       <div class="profile-3g0uv">
         <div class="index-18Ili">
           <span></span>
         </div>
         <div class="profile-xfCcC">
           <p class="profile-1_mtk">
-            <span>4ee6228a050</span>
+            <span>登陆/注册</span>
           </p>
           <p class="profile-1UP72">
             <i class="iconfont icon-shouji"></i>
-            <span>135****8893</span>
+            <span>登陆后享受更多特权</span>
           </p>
         </div>
         <i class="profile-2XuMq iconfont icon-right"></i>
       </div>
-    </section>
+    </router-link>
+    <!-- 登陆了 -->
+    <router-link to="/info" v-else>
+      <div class="profile-3g0uv">
+        <div class="index-18Ili">
+          <span></span>
+        </div>
+        <div class="profile-xfCcC">
+          <p class="profile-1_mtk">
+            <span>{{username}}</span>
+          </p>
+          <p class="profile-1UP72">
+            <i class="iconfont icon-shouji"></i>
+            <span>{{phone}}</span>
+          </p>
+        </div>
+        <i class="profile-2XuMq iconfont icon-right"></i>
+      </div>
+    </router-link>
     <!-- 红包金币 -->
     <div class="index-1G7HV">
       <a href="#" class="index-1ryAh">
@@ -87,6 +106,41 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      username:'',
+      phone:''
+    }
+  },
+  methods: {
+    isLogin: function(){
+      if(localStorage){
+        if(localStorage.getItem("username")){
+          var username=localStorage.getItem("username");
+          this.username=username;
+        }
+        if(localStorage.getItem("phone")){
+          var phone=localStorage.getItem("phone");
+          //隐藏电话号码的中间4位
+          var myphone = phone.substr(3, 4);
+          var lphone = phone.replace(myphone, "****");
+          this.phone=lphone;
+        }
+      }
+    },
+  },
+  activated() {
+    this.isLogin();
+  }
+  // mounted() {
+  //   this.isLogin();
+  // },
+}
+</script>
+
 
 <style>
   /* 头部 */
