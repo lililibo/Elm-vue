@@ -122,22 +122,22 @@ export default {
           var username=localStorage.getItem("username");
           this.username=username;
         }
-        if(localStorage.getItem("username")){
+        if(localStorage.getItem("phone")){
           var phone=localStorage.getItem("phone");
-          this.phone=phone;
+          //隐藏电话号码的中间4位
+          var myphone = phone.substr(3, 4);
+          var lphone = phone.replace(myphone, "****");
+          this.phone=lphone;
         }
       }
     },
-    //隐藏电话的中间4位数字
-    // hidePhone: function(){
-    //   if(!this.phone==''){
-    //     this.phone
-    //   }
-    // }
   },
-  mounted() {
+  activated() {
     this.isLogin();
-  },
+  }
+  // mounted() {
+  //   this.isLogin();
+  // },
 }
 </script>
 
