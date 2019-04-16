@@ -46,7 +46,7 @@ export default {
               }
             })
             .then(function(res) {
-              console.log(res.data);
+              //console.log(res.data);
               if (res.data.code == 0) {
                 _this.username = username;
                 var phone = localStorage.getItem("phone");

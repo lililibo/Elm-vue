@@ -73,13 +73,14 @@
           </li>
         </ul>
       </div>
-
+      <!-- 未登录 -->
       <section class="lblist_b" v-if="username==''">
       <img src="//fuss10.elemecdn.com/d/60/70008646170d1f654e926a2aaa3afpng.png">
       <p>没有结果</p>
       <h3>登陆后查看更多商家</h3>
       <router-link to="/login" class="login">立即登陆</router-link>
       </section>
+      <!-- 已登录 -->
       <div class="list_b" v-else>
         <div class="seller_t">
           <img
@@ -169,8 +170,32 @@ export default {
     },
     //得到localStorage中的username
     gitUsername () {
-      if(localStorage.getItem("username")){
-        this.username = username
+      if (localStorage) {
+        if (localStorage.getItem("username")) {
+          var username = localStorage.getItem("username");
+          var _this = this;
+          //对username进行验证
+          axios
+            .get("http://localhost:3000/users/usernameyz", {
+              params: {
+                username: username
+              }
+            })
+            .then(function(res) {
+              //console.log(res.data);
+              if (res.data.code == 0) {
+                _this.username = username;
+              } else if(res.data.code==-1) {
+                //console.log(res.data.msg);
+                _this.username = ""
+              }
+            })
+            .catch(function(err) {
+              alert(err);
+            });
+        } else {
+          this.username = "";
+        }
       }
     }
   },
