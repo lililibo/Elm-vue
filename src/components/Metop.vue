@@ -131,7 +131,7 @@
     </div>
     <Carousel></Carousel>
     <!-- 轮播
-    <div class="Carousel">
+    <div class="carousel">
       <img
         src="https://fuss10.elemecdn.com/7/05/bb01f6e34c18a0e12d39b7c98e6f6jpeg.jpeg?imageMogr/format/webp/thumbnail/568x/"
       >
@@ -223,7 +223,7 @@
 </template>
 
 <script>
-import Carousel from '../components/Carousel'
+import Carousel from './Carousel'
 export default {
   components: {
     Carousel
@@ -354,12 +354,12 @@ export default {
   color: #d9b365;
 }
 /* 轮播 */
-/* .Carousel {
+/* .carousel {
   width: 3.55rem;
   height: 0.9rem;
   margin: 0.05rem 0.1rem 0.08rem;
 }
-.Carousel img {
+.carousel img {
   width: 100%;
   height: 100%;
 } */
