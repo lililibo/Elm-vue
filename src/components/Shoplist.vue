@@ -46,7 +46,7 @@
                   <span>配送费约￥{{item.float_delivery_fee}}</span>
                 </div>
                 <div>
-                  <span>{{item.distance}}km |</span>
+                  <span>{{item.distance}}|</span>
                   <span>{{item.order_lead_time}}</span>
                 </div>
               </div>
@@ -76,6 +76,8 @@
           </div>
         </div>
       </li>
+      <p class="loadMore" v-if="sw<pageNum">正在加载</p>
+      <p class="loadMore" v-else>没有了，到底了</p>
     </ul>
   </div>
 </template>
@@ -86,9 +88,19 @@ export default {
   data() {
     return {
       shopList: [],
-      order_by:4,
-      current: 'zonghe'
+      order_by: 4,
+      current: "zonghe",
+      sw: 1,
+      pageNum: 7,
+      pageSize: 8,
+      total: 56
     };
+  },
+  computed: {
+    //计算页数
+    getPageNum: function() {
+      return Math.ceil(this.total / this.pageSize);
+    }
   },
   methods: {
     getShopList: function() {
@@ -99,40 +111,70 @@ export default {
             latitude: 22.547,
             longitude: 114.085947,
             offset: 0,
-            limit: 8,
+            limit: this.pageSize,
             order_by: this.order_by
           }
         })
         .then(function(res) {
           _this.shopList = res.data;
-          //console.log(_this.shopList)
+          //console.log(res.data);
         })
         .catch(function(err) {
           alert(err);
         });
     },
-    juli: function(){
-      this.current='juli'
-      this.order_by=5
-      this.getShopList()
+    juli: function() {
+      this.current = "juli";
+      this.order_by = 5;
+      this.getShopList();
+      this.getScroll();
     },
-    pingfen :function(){
-      this.current='pingfen'
-      this.order_by=3
-      this.getShopList()
+    pingfen: function() {
+      this.current = "pingfen";
+      this.order_by = 3;
+      this.getShopList();
+      this.getScroll();
     },
-    zonghe: function(){
-      this.current='zonghe'
-      this.order_by=4
-      this.getShopList()
+    zonghe: function() {
+      this.current = "zonghe";
+      this.order_by = 4;
+      this.getShopList();
+      this.getScroll();
     },
-    shaixuan: function () {
-      this.current = 'shaixuan'
+    shaixuan: function() {
+      this.current = "shaixuan";
+    },
+    //滚动事件
+    getScroll: function() {
+      // 滚动事件
+      var _this = this;
+      window.onscroll = function() {
+        //变量scrollTop是滚动条滚动时，距离顶部的距离
+        var scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop;
+        //变量windowHeight是可视区的高度
+        var windowHeight =
+          document.documentElement.clientHeight || document.body.clientHeight;
+        //变量scrollHeight是滚动条的总高度
+        var scrollHeight =
+          document.documentElement.scrollHeight || document.body.scrollHeight;
+        //滚动条到底部的条件
+        if (scrollTop + windowHeight >= scrollHeight) {
+          //写后台加载数据的函数
+          if (_this.sw < _this.pageNum) {
+            
+            _this.pageSize = _this.pageSize + 8;
+            _this.getShopList();
+            _this.sw++;
+          }
+        }
+      };
     }
   },
   mounted() {
-    this.order_by=4;
+    this.order_by = 4;
     this.getShopList();
+    this.getScroll();
   }
 };
 </script>
@@ -246,6 +288,12 @@ export default {
   font-weight: bold;
   color: black;
   font-size: 16px;
+}
+/* 加载更多 */
+.loadMore {
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
 }
 </style>
 
