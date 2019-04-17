@@ -4,8 +4,12 @@
     <div id="header">
       <div class="adderss">
         <router-link to="/city">
+<<<<<<< HEAD
+          <i class="iconfont icon-dingwei"></i> <span :name="msg">{{msg}}</span>
+=======
           <i class="iconfont icon-dingwei"></i>
           <span>定位失败</span>
+>>>>>>> 9da28f6df4e52a91cb70a8025a6a039444697c8d
           <i class="iconfont icon-xiajiantou"></i>
         </router-link>
       </div>
@@ -108,6 +112,11 @@ export default {
     Carousel,
     Banner,
     Shoplist
+  },
+  computed: {
+    msg(){
+      return this.$store.state.thiscity
+    }
   },
   methods: {
     //得到导航的列表

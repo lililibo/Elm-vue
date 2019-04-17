@@ -3,7 +3,12 @@
     <div class="cityhead fiex-head">
       <div class="citihead">
         <div class="cityhome">
-          <svg @click="fn1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 33" class="city-13oid_0">
+          <svg
+            @click="fn1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 28 33"
+            class="city-13oid_0"
+          >
             <path
               fill-rule="evenodd"
               d="M17.655 1.853L15.961.159.033 16.072 15.961 32l1.694-1.694L3.429 16.08 17.655 1.854z"
@@ -26,107 +31,30 @@
           <input type="text" class="city-input" placeholder="输入城市名或者拼音">
         </div>
       </div>
-      <div class="city-listhet" id="pydw">
-        <div class="city-3Obwy_0" v-for="item in myCitys" :key="item.py">
-          <div class="city-1bnTP_0" :id="item.py">{{item.py}}</div>
-          <div class="city-5r26m_0" v-for=" list in item.list " :key="list.cityid">
-            <span>{{list.name}}</span>
-          </div>
-           <div class="leeter">
-      <ul>
-        <li v-for="leetpy in myCitys"
-        :key="leetpy.py"
-        @click="fn2(leetpy.py)"
-        >{{leetpy.py}}</li>
-      </ul>
-    </div>
-        </div>
-      </div>
+      <citylist></citylist>
     </div>
   </div>
 </template>
 <script>
-import Axios from "axios";
+import citylist from "../components/city/city.vue";
 export default {
-  data() {
-    return {
-      citys: []
-    };
-  },
-  computed: {
-    myCitys() {
-      var index = 0;
-      var flag = {};
-      var result = [];
-      this.citys.forEach(item => {
-        var py = item.pinyin.substr(0, 1).toUpperCase();
-
-        if (flag[py]) {
-          result[flag[py] - 1].list.push(item);
-        } else {
-          var obj = {
-            py: py,
-            list: [item]
-          };
-          flag[py] = ++index;
-          result.push(obj);
-        }
-      });
-      result.sort((a, b) => {
-        return a.py.charCodeAt() - b.py.charCodeAt();
-      });
-      return result;
-    },
-
-    hotCitys() {
-      return this.citys.filter(item => {
-        return item.isHot;
-      });
-    },
-
-    pys() {
-      return this.myCitys.map(item => {
-        return item.py;
-      });
-    }
+  props:[name],
+  components:{
+    citylist,
   },
   methods: {
-    fn2(py) {
-      var el = document.getElementById(py);
-      var box = document.getElementById("pydw");
-       box.scrollTop = el.offsetTop-90;
+    fn1() {
+      this.$router.go(-1);
     },
-    fn1(){
-      this.$router.go(-1)
-    },
-    getCityList() {
-      Axios.get("https://m.maizuo.com/gateway?k=4551001", {
-        headers: {
-          "X-Client-Info":
-            '{"a":"3000","ch":"1002","v":"1.0.0","e":"15546520171868310774513"}',
-          "X-Host": "mall.film-ticket.city.list"
-        }
-      }).then(res => {
-        let data = res.data;
-        if (data.status === 0) {
-          this.citys = data.data.cities;
-        } else {
-          alert(data.msg);
-        }
-      });
-    }
   },
-  created() {
-    this.getCityList();
-  }
-};
+}
 </script>
+
 <style scoped>
 .cityhead {
   width: 100%;
   height: 44px;
   background: hsl(201, 100%, 50%);
-  border-bottom: 0.1px solid #ffffff;
 }
 .citihead {
   width: 100%;
@@ -180,39 +108,7 @@ export default {
 .list-city {
   width: 100%;
   overflow-y: auto;
-}
-.city-listhet{
-  height: 520px;
-  overflow: scroll;
-}
-.city-1bnTP_0 {
-  width: 100%;
-  box-sizing: border-box;
-  padding-left: 15px;
-  height: 37px;
-  background: #f5f5f5;
-  border-bottom: 1px solid #ededee;
-  line-height: 37px;
-}
-.city-5r26m_0 {
-  width: 100%;
-  height: 50px;
-  box-sizing: border-box;
-  background: #ffffff;
-  line-height: 50px;
-  font-size: 14px;
-  margin-left: 15px;
-  color: #333333;
-  border-bottom: 1px solid #dddddd;
-}
-.leeter{
-  position: fixed;
-  top: 130px;
-  right: 10px;
-  font-size: 10px;
-  bottom: 0;
-  color: #999;
-  font-weight: 100;
+  background: #fff;
 }
 </style>
 
