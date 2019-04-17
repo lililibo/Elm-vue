@@ -3,19 +3,19 @@
     <div class="list_c">
       <ul>
         <li>
-          <a class="list_c_active" @click="zonghe">
+          <a @click="zonghe" :class="{ list_c_active : current=='zonghe'}">
             综合排序
             <i class="iconfont icon-xiajiantou"></i>
           </a>
         </li>
         <li>
-          <a @click="juli">距离最近</a>
+          <a @click="juli" :class="{ list_c_active : current=='juli'}">距离最近</a>
         </li>
         <li>
-          <a @click="pingfen">品质联盟</a>
+          <a @click="pingfen" :class="{ list_c_active : current=='pingfen'}">品质联盟</a>
         </li>
         <li>
-          <a>
+          <a @click="shaixuan" :class="{ list_c_active : current=='shaixuan'}">
             筛选
             <i class="iconfont icon-loudou"></i>
           </a>
@@ -86,7 +86,8 @@ export default {
   data() {
     return {
       shopList: [],
-      order_by:4
+      order_by:4,
+      current: 'zonghe'
     };
   },
   methods: {
@@ -111,16 +112,22 @@ export default {
         });
     },
     juli: function(){
-      this.order_by=5;
-      this.getShopList();
+      this.current='juli'
+      this.order_by=5
+      this.getShopList()
     },
     pingfen :function(){
-      this.order_by=3;
-      this.getShopList();
+      this.current='pingfen'
+      this.order_by=3
+      this.getShopList()
     },
     zonghe: function(){
-      this.order_by=4;
-      this.getShopList();
+      this.current='zonghe'
+      this.order_by=4
+      this.getShopList()
+    },
+    shaixuan: function () {
+      this.current = 'shaixuan'
     }
   },
   mounted() {
@@ -237,6 +244,8 @@ export default {
 }
 .list_c_active {
   font-weight: bold;
+  color: black;
+  font-size: 16px;
 }
 </style>
 
