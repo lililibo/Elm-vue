@@ -4,7 +4,7 @@
     <div id="header">
       <div class="adderss">
         <router-link to="/city">
-          <i class="iconfont icon-dingwei"></i> <span :name="cityname">{{cityname}}</span>
+          <i class="iconfont icon-dingwei"></i> <span :name="msg">{{msg}}</span>
           <i class="iconfont icon-xiajiantou"></i>
         </router-link>
       </div>
@@ -148,13 +148,17 @@ export default {
     return {
       bannerList1: [],
       bannerList2: [],
-      username: '',
-      cityname:'定位失败'
+      username: ''
     }
   },
   components: {
     Carousel,
     Banner
+  },
+  computed: {
+    msg(){
+      return this.$store.state.thiscity
+    }
   },
   methods: {
     //得到导航的列表

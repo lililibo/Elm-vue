@@ -38,6 +38,7 @@
 <script>
 import citylist from "../components/city/city.vue";
 export default {
+  props:[name],
   components:{
     citylist,
   },

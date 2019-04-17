@@ -2,7 +2,7 @@
   <div class="city-listhet" id="pydw">
     <div class="city-3Obwy_0" v-for="item in citysolt" :key="item.name">
       <div class="city-1bnTP_0" :id="item.name">{{item.name}}</div>
-      <div class="city-5r26m_0" v-for=" list in item.key " :key="list.id">
+      <div class="city-5r26m_0" v-for=" list in item.key " :key="list.id" @click="fn3(list.name)">
         <span>{{list.name}}</span>
       </div>
       <div class="leeter">
@@ -15,6 +15,7 @@
 </template>
 <script>
 import Axios from "axios";
+import{ mapActions}from 'vuex'
 export default {
   data() {
     return {
@@ -42,6 +43,11 @@ export default {
       var el = document.getElementById(py);
       var box = document.getElementById("pydw");
       box.scrollTop = el.offsetTop - 90;
+    },
+    fn3(item){
+      this.$store.state.thiscity=item;
+      this.$store.commit("setcity",item)
+       this.$router.go(-1);
     },
     gitcity() {
       Axios.get("https://elm.cangdu.org/v1/cities?type=group").then(req => {
