@@ -33,7 +33,7 @@ export default new VueRouter({
       path: '/profile/info', component: () => import('./views/Info.vue')
     },
     {
-      path: '/shop', component: () => import('./views/Detail.vue')
+      path: '/shop/:id', name: 'detail', component: () => import('./views/Detail.vue')
     },
     {
       path: '/register', component: () => import('./views/Register.vue'),meta:{title:'注册'}

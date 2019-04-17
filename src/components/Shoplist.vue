@@ -24,7 +24,7 @@
     </div>
     <ul>
       <li v-for="item in shopList" :key="item.id">
-        <div class="list_b">
+        <router-link tag="div" :to="{ name: 'detail',params: { id: item.id } }" class="list_b">
           <div class="seller_t">
             <img :src="'//elm.cangdu.org/img/' + item.image_path">
             <div class="seller_t_r">
@@ -74,7 +74,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </router-link>
       </li>
       <p class="loadMore" v-if="sw<pageNum">正在加载</p>
       <p class="loadMore" v-else>没有了，到底了</p>
