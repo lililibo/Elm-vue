@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bgfind">
     <router-view></router-view>
     <find></find>
     <findtime></findtime>
@@ -16,3 +16,12 @@ export default {
   }
 };
 </script>
+<style>
+body,
+html {
+  width: auto;
+  height: auto;
+  background-color: #f5f5f5;
+}
+</style>
+

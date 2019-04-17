@@ -4,7 +4,7 @@
     <div id="header">
       <div class="adderss">
         <router-link to="/city">
-          <i class="iconfont icon-dingwei"></i> <span>定位失败</span>
+          <i class="iconfont icon-dingwei"></i> <span :name="cityname">{{cityname}}</span>
           <i class="iconfont icon-xiajiantou"></i>
         </router-link>
       </div>
@@ -148,7 +148,8 @@ export default {
     return {
       bannerList1: [],
       bannerList2: [],
-      username: ''
+      username: '',
+      cityname:'定位失败'
     }
   },
   components: {
