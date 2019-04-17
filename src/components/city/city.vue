@@ -15,7 +15,6 @@
 </template>
 <script>
 import Axios from "axios";
-import{ mapActions}from 'vuex'
 export default {
   data() {
     return {
