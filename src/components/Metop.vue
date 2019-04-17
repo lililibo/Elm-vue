@@ -4,7 +4,12 @@
     <div id="header">
       <div class="adderss">
         <router-link to="/city">
+<<<<<<< HEAD
           <i class="iconfont icon-dingwei"></i> <span :name="msg">{{msg}}</span>
+=======
+          <i class="iconfont icon-dingwei"></i>
+          <span>定位失败</span>
+>>>>>>> 9da28f6df4e52a91cb70a8025a6a039444697c8d
           <i class="iconfont icon-xiajiantou"></i>
         </router-link>
       </div>
@@ -45,115 +50,67 @@
     <!-- 轮播-->
     <Carousel></Carousel>
     <!-- 商家列表 -->
-
     <div class="list">
       <div class="list_t">
         <span></span>&nbsp;&nbsp;&nbsp;&nbsp;推荐商家&nbsp;&nbsp;&nbsp;&nbsp;
         <span></span>
       </div>
-      <div class="list_c">
-        <ul>
-          <li>
-            <a href="#" class="list_c_active">
-              综合排序
-              <i class="iconfont icon-xiajiantou"></i>
-            </a>
-          </li>
-          <li>
-            <a href="#">距离最近</a>
-          </li>
-          <li>
-            <a href="#">品质联盟</a>
-          </li>
-          <li>
-            <a href="#">
-              筛选
-              <i class="iconfont icon-loudou"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
       <!-- 未登录 -->
-      <section class="lblist_b" v-if="username==''">
-      <img src="//fuss10.elemecdn.com/d/60/70008646170d1f654e926a2aaa3afpng.png">
-      <p>没有结果</p>
-      <h3>登陆后查看更多商家</h3>
-      <router-link to="/login" class="login">立即登陆</router-link>
-      </section>
-      <!-- 已登录 -->
-      <div class="list_b" v-else>
-        <div class="seller_t">
-          <img
-            src="https://fuss10.elemecdn.com/4/ee/15627ce26bf60533e459b0299c9edpng.png?imageMogr/format/webp/thumbnail/!130x130r/gravity/Center/crop/130x130/"
-          >
-          <div class="seller_t_r">
-            <div class="seller_t_r1">
-              <h3>
-                <span>品牌</span>
-                <span>尊宝比萨 （黄田店）</span>
-              </h3>
-              <span>口···</span>
-            </div>
-            <div class="seller_t_r2">
-              <span>☆ ☆ ☆ ☆ ☆</span>
-              <span>4.8</span>
-              <span>月售296单</span>
-            </div>
-            <div class="seller_t_r3">
-              <div>
-                <span>20 起送 |</span>
-                <span>免配送费</span>
-              </div>
-              <div>
-                <span>2.26km |</span>
-                <span>46分钟</span>
-              </div>
-            </div>
-          </div>
+      <div v-if="username==''">
+        <div class="list_c">
+          <ul>
+            <li>
+              <a href="#" class="list_c_active">
+                综合排序
+                <i class="iconfont icon-xiajiantou"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#">距离最近</a>
+            </li>
+            <li>
+              <a href="#">品质联盟</a>
+            </li>
+            <li>
+              <a href="#">
+                筛选
+                <i class="iconfont icon-loudou"></i>
+              </a>
+            </li>
+          </ul>
         </div>
-
-        <div class="seller_b">
-          <div class="seller_b1">
-            <span>排骨饭</span>
-            <span>品质联盟</span>
-          </div>
-          <div class="seller_b2"></div>
-          <div class="seller_b3">
-            <div class="seller_b3l">
-              <div>
-                <span>减</span> 满29减12，满49减25，满69减35，满99减42
-              </div>
-              <div>
-                <span>折</span> 特价商品0.99元起
-              </div>
-            </div>
-            <div class="seller_b3r">
-              5个活动
-              <i class="iconfont icon-xiajiantou"></i>
-            </div>
-          </div>
-        </div>
+        <section class="lblist_b">
+          <img src="//fuss10.elemecdn.com/d/60/70008646170d1f654e926a2aaa3afpng.png">
+          <p>没有结果</p>
+          <h3>登陆后查看更多商家</h3>
+          <router-link to="/login" class="login">立即登陆</router-link>
+        </section>
       </div>
-    </div>
 
+      <!-- 已登录 -->
+      <Shoplist v-else></Shoplist>
+      
+    </div>
   </div>
 </template>
 
 <script>
-import Carousel from './Carousel'
-import Banner from './Banner'
-import axios from 'axios'
+import Carousel from "./Carousel";
+import Banner from "./Banner";
+import axios from "axios";
+import Shoplist from "./Shoplist";
 export default {
   data() {
     return {
       bannerList1: [],
       bannerList2: [],
-      username: ''
-    }
+      username: ""
+    };
   },
   components: {
     Carousel,
-    Banner
+    Banner,
+    Shoplist
   },
   computed: {
     msg(){
@@ -162,19 +119,19 @@ export default {
   },
   methods: {
     //得到导航的列表
-    getBannerList () {
-      axios.get('https://elm.cangdu.org/v2/index_entry').then(res => {
-        let data = res.data
-        for(var i = 0; i < 10; i++){
-          this.bannerList1.push(data[i])
+    getBannerList() {
+      axios.get("https://elm.cangdu.org/v2/index_entry").then(res => {
+        let data = res.data;
+        for (var i = 0; i < 10; i++) {
+          this.bannerList1.push(data[i]);
         }
-        for(var j=10; j<data.length; j++){
-          this.bannerList2.push(data[j])
+        for (var j = 10; j < data.length; j++) {
+          this.bannerList2.push(data[j]);
         }
-      })
+      });
     },
     //得到localStorage中的username
-    gitUsername () {
+    gitUsername() {
       if (localStorage) {
         if (localStorage.getItem("username")) {
           var username = localStorage.getItem("username");
@@ -190,9 +147,9 @@ export default {
               //console.log(res.data);
               if (res.data.code == 0) {
                 _this.username = username;
-              } else if(res.data.code==-1) {
+              } else if (res.data.code == -1) {
                 //console.log(res.data.msg);
-                _this.username = ""
+                _this.username = "";
               }
             })
             .catch(function(err) {
@@ -205,19 +162,19 @@ export default {
     }
   },
   activated() {
-    this.gitUsername()
+    this.gitUsername();
   },
   created() {
-    this.getBannerList()
+    this.getBannerList();
   }
-}
+};
 </script>
 <style>
 /* 头部 */
 .iconfont {
   font-size: 0.16rem !important;
 }
-.metoptotal{
+.metoptotal {
   background: white;
 }
 #header {
@@ -321,102 +278,5 @@ export default {
 }
 .list_c_active {
   font-weight: bold;
-}
-.lblist_b{
-  height: 3.15rem;
-  background: white;
-  text-align: center;
-  margin-top: .4rem;
-}
-.lblist_b img{
-  width: 2rem;
-  height: 2rem;
-}
-.lblist_b p{
-  font-size: .2rem;
-  color: #6a6a6a;
-}
-.lblist_b h3{
-  margin-bottom: .15rem;
-}
-.login {
-  padding: 2.666667vw;
-  min-width: 32vw;
-  border: none;
-  border-radius: 0.533333vw;
-  background-color: #56d176;
-  color: #fff;
-  text-align: center;
-  font-size: 0.14rem;
-}
-.list_b {
-  height: 1.77rem;
-  border-bottom: 1px solid #f8f8f8;
-  box-sizing: border-box;
-  padding: 0.15rem 0.11rem 0 0.1rem;
-}
-.seller_t {
-  display: flex;
-  height: 0.64rem;
-}
-.seller_t img {
-  width: 0.64rem;
-  height: 0.64rem;
-  margin-right: 0.1rem;
-}
-.seller_t_r {
-  flex: 1;
-}
-.seller_t_r1 {
-  display: flex;
-  justify-content: space-between;
-}
-.seller_t_r1 h3 {
-  color: #333333;
-  font-size: 0.14rem;
-}
-.seller_t_r1 h3 span:nth-of-type(1) {
-  display: inline-block;
-  width: 0.3rem;
-  height: 0.17rem;
-  line-height: 0.16rem;
-  background: #ffe920;
-  font-size: 0.1rem;
-  color: #6f3f15;
-  text-align: center;
-}
-.seller_t_r3 {
-  display: flex;
-  justify-content: space-between;
-}
-.seller_b {
-  margin-left: 0.74rem;
-}
-.seller_b1 span:nth-of-type(1) {
-  margin-right: 0.6rem;
-}
-.seller_b2 {
-  height: 0.14rem;
-}
-.seller_b3 {
-  display: flex;
-  justify-content: space-between;
-}
-.seller_b3l {
-  /*margin-right: .53rem;*/
-  width: 1.79rem;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.seller_b3l div span {
-  display: inline-block;
-  width: 0.14rem;
-  line-height: 0.14rem;
-  text-align: center;
-  height: 0.14rem;
-  font-size: 0.1rem;
-  color: #fff;
-  background: #f07373;
 }
 </style>
