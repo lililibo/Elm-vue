@@ -5,12 +5,12 @@
         <ul>
           <li
           v-for="banner1 in bannerList1"
-          :key="banner1.goodId">
+          :key="banner1.id">
             <a href="#">
               <img
-                :src="banner1.img"
+                :src="'https://fuss10.elemecdn.com' + banner1.image_url"
               >
-              {{ banner1.name }}
+              {{ banner1.title }}
             </a>
           </li>
         </ul>
@@ -19,12 +19,12 @@
         <ul>
           <li
           v-for="banner2 in bannerList2"
-          :key="banner2.goodId">
+          :key="banner2.id">
             <a href="#">
               <img
-                :src="banner2.img"
+                :src="'https://fuss10.elemecdn.com' + banner2.image_url"
               >
-              {{ banner2.name }}
+              {{ banner2.title }}
             </a>
           </li>
         </ul>
@@ -67,20 +67,17 @@ export default {
 
 <style>
 /* 导航 */
-.banner {
-  height: 1.68rem;
-  background: white;
+.banner{
+	height: 1.68rem;
 }
-.banner ul {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 0.1rem;
-  justify-content: space-around;
+.banner ul{
+	margin-bottom: .1rem;
 }
-.banner ul li {
-  margin-top: 0.02rem;
-  width: 20%;
-  height: 0.75rem;
+.banner ul li{
+	float: left;
+	margin-top: .02rem;
+	width: 20%;
+	height: .75rem;
 }
 .banner img {
   width: 0.5rem;

@@ -159,12 +159,12 @@ export default {
   methods: {
     //得到导航的列表
     getBannerList () {
-      axios.get('/json/banner.json').then(res => {
+      axios.get('https://elm.cangdu.org/v2/index_entry').then(res => {
         let data = res.data
         for(var i = 0; i < 10; i++){
           this.bannerList1.push(data[i])
         }
-        for(var j=10; j<20; j++){
+        for(var j=10; j<data.length; j++){
           this.bannerList2.push(data[j])
         }
       })
@@ -243,46 +243,6 @@ export default {
 .search a {
   color: #999999;
   font-size: 0.14rem;
-}
-/* 导航 */
-.banner {
-  height: 1.68rem;
-  background: white;
-}
-.banner ul {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 0.1rem;
-  justify-content: space-around;
-}
-.banner ul li {
-  margin-top: 0.02rem;
-  width: 20%;
-  height: 0.75rem;
-}
-.banner img {
-  width: 0.5rem;
-  height: 0.5rem;
-}
-.banner a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.banner_b {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.banner_b span {
-  display: block;
-  margin-right: 0.05rem;
-  width: 0.09rem;
-  height: 0.02rem;
-  background: #cccccc;
-}
-.banner_b_active {
-  background: #ccedff !important;
 }
 /* 推荐 */
 .groom {
