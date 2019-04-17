@@ -9,7 +9,7 @@
           <i class="iconfont icon-xiajiantou"></i>
         </router-link>
       </div>
-      <div class="search">
+      <div class="search" :class="{ searchfixed: isFixedTabs}">
         <a href="#">
           <i class="iconfont icon-fdj"></i> 搜索饿了么商家、商品名称
         </a>
@@ -100,6 +100,7 @@ export default {
     return {
       bannerList1: [],
       bannerList2: [],
+      isFixedTabs: false,
       username: ""
     };
   },
@@ -150,13 +151,26 @@ export default {
           this.username = "";
         }
       }
+    },
+    //判断滚动条的距离让搜索固定在顶部
+    onScoll () {
+      let scrollTop = document.documentElement.scrollTop
+      if (scrollTop >= 49) {
+        this.isFixedTabs = true
+      } else {
+        this.isFixedTabs = false
+      }
     }
   },
   activated() {
-    this.gitUsername();
+    this.gitUsername()
+    window.addEventListener('scroll', this.onScoll)
+  },
+  deactivated () {
+    window.removeEventListener('scroll', this.onScoll)
   },
   created() {
-    this.getBannerList();
+    this.getBannerList()
   }
 };
 </script>
@@ -164,6 +178,10 @@ export default {
 /* 头部 */
 .iconfont {
   font-size: 0.16rem !important;
+}
+.searchfixed{
+  position: fixed;
+  top: 0;
 }
 .metoptotal {
   background: white;
@@ -173,17 +191,22 @@ export default {
   box-sizing: border-box;
   background: #00a7ff;
   border-bottom: 1px solid #80cdff;
-  padding: 0 0.14rem 0 0.14rem;
 }
 .adderss {
-  padding: 0.15rem 0 0.1rem 0;
+  padding: 0.15rem 0.14rem 0 0.14rem;
 }
 .adderss a {
   font-weight: 700;
   font-size: 0.16rem;
   color: white;
 }
-.search {
+.search{
+  padding: 0.1rem 0.14rem 0.1rem 0.14rem;
+  background: #00a7ff;
+  z-index: 100;
+}
+.search a{
+  display: block;
   width: 3.47rem;
   height: 0.37rem;
   line-height: 0.35rem;
