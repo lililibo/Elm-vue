@@ -54,6 +54,10 @@ export default {
   color: #fff;
   font-weight: bold;
 }
+.van-button{
+  position: fixed;
+  bottom: 0;
+}
 .van-button--danger{
   background: #fff;
   border: 0.01rem solid #dddddd;
