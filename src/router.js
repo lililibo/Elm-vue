@@ -40,6 +40,9 @@ export default new VueRouter({
       path: '/commend', component: () => import('./views/Commend.vue'),meta:{title:'推荐有奖'}
     },
     {
+      path: '/mservice', component: () => import('./views/Service.vue'),meta:{title:'我的客服'}
+    },
+    {
       path: '/profile/info', component: () => import('./views/Info.vue')
     },
     {
