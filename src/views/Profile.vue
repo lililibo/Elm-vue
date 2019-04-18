@@ -160,9 +160,6 @@ export default {
         }
       }
     },
-<<<<<<< HEAD
-
-=======
     //点击分享拿10元现金
     commend: function() {
       this.isLogin();
@@ -181,7 +178,6 @@ export default {
         this.$router.push("/mservice");
       }
     }
->>>>>>> 0072ac2fa08fd81c88e9cabb1d24cd602460a43e
   },
   activated() {
     this.isLogin();
