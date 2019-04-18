@@ -75,7 +75,7 @@
       </a>
       <a href="#" class="index-2MEEn">
         <i class="iconfont icon-liwu" style="color:rgb(252, 123, 83)"></i>
-        <div class="index-yydpu">
+        <div class="index-yydpu" @click="commend">
           分享拿10元现金
           <i class="iconfont icon-right"></i>
         </div>
@@ -97,13 +97,13 @@
           <i class="iconfont icon-right"></i>
         </div>
       </a>
-      <a href="#" class="index-2MEEn">
+      <router-link  to="/service/agreement" class="index-2MEEn">
         <i class="iconfont icon-guize" style="color:rgb(74, 165, 240)"></i>
         <div class="index-yydpu">
           规则中心
           <i class="iconfont icon-right"></i>
         </div>
-      </a>
+        </router-link>
     </section>
     <!-- 隐私政策 -->
     <div class="profile-2dyk_">
@@ -160,7 +160,15 @@ export default {
         }
       }
     },
-    
+    //点击分享拿10元现金
+    commend: function(){
+      this.isLogin();
+      if(this.username==""){
+        this.$router.replace("/login")
+      }else{
+        this.$router.replace("/commend")
+      }
+    }
   },
   activated() {
     this.isLogin();

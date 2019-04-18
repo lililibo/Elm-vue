@@ -84,7 +84,7 @@
 
       <!-- 已登录 -->
       <Shoplist v-else></Shoplist>
-      
+
     </div>
   </div>
 </template>

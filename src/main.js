@@ -2,6 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store/index'
+import 'vant/lib/button/style';
+
+import { Collapse, CollapseItem } from 'vant';
+
+Vue.use(Collapse).use(CollapseItem);
 
 import { AddressList,NavBar } from 'vant'
 Vue.use(AddressList).use(NavBar)
@@ -13,6 +18,8 @@ router.beforeEach((to, from, next) => {
   }
   next()
 })
+
+
 Vue.config.productionTip = false
 
 new Vue({
