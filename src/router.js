@@ -30,6 +30,9 @@ export default new VueRouter({
     path: '/login', component: () => import('./views/Login.vue'),meta:{title:'登陆'}
     },
     {
+      path: '/profile/address', component: () => import('./views/Address.vue')
+    },
+    {
       path: '/profile/info', component: () => import('./views/Info.vue')
     },
     {

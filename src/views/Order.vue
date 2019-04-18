@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 未登陆 -->
-    <section class="nodatatipWrap NoDataTip-wrapper_1Gwf0tm" v-if="username=='true'">
+    <section class="nodatatipWrap NoDataTip-wrapper_1Gwf0tm" v-if="username==''">
       <img src="//fuss10.elemecdn.com/8/c8/bbe5984003cb26fc7b445a4a15195png.png">
       <h3>登陆后查看外卖订单</h3>
       <router-link to="/login" class="login">立即登陆</router-link>
