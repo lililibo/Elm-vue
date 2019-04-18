@@ -23,7 +23,7 @@
       </ul>
     </div>
     <ul>
-      <li v-for="item in shopList" :key="item.id">
+      <li v-for="item in shopList" :key="item.id" @click="setid(item.id)">
         <router-link tag="div" :to="{ name: 'detail',params: { id: item.id } }" class="list_b">
           <div class="seller_t">
             <img :src="'//elm.cangdu.org/img/' + item.image_path">
@@ -123,6 +123,10 @@ export default {
           alert(err);
         });
     },
+    setid:function(shopid){
+      this.$store.commit('setshopid',shopid)
+    },
+    //把商家id传入vuex
     juli: function() {
       this.current = "juli";
       this.order_by = 5;
@@ -162,7 +166,7 @@ export default {
         if (scrollTop + windowHeight >= scrollHeight) {
           //写后台加载数据的函数
           if (_this.sw < _this.pageNum) {
-            
+
             _this.pageSize = _this.pageSize + 8;
             _this.getShopList();
             _this.sw++;

@@ -12,7 +12,7 @@
       </div>
       <div class="header_b">
         <div class="header_b1">
-          八戒排骨
+          {{setname}}
           <i class="iconfont icon-sanjiaoright"></i>
         </div>
         <div class="header_b2">
@@ -48,9 +48,10 @@
     <div class="shangpin">
       <div class="shangpinl">
         <ul>
-          <li class="shangpinl_active">
+          <li class="shangpinl_active" v-for="litem in labtitle" :key="litem.id">
             <a href="#">
-              <i class="iconfont icon-youhui"></i>优惠
+              <i class="iconfont icon-youhui"></i>
+              {{litem.name}}
             </a>
           </li>
         </ul>
@@ -105,24 +106,65 @@
 </template>
 
 <script>
+import Axios from "axios";
 export default {
   data() {
     return {
-      show: false,
+			show: false,
+			//商家名称
+			uid: 1,
+      sid: "",
+      labtitle: {},
+      goodsdata: {},
       imageURL:
-        "//fuss10.elemecdn.com/6/a6/07780287ee18bf351cfa48f02b637jpeg.jpeg?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/"
-    };
+				"//fuss10.elemecdn.com/6/a6/07780287ee18bf351cfa48f02b637jpeg.jpeg?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/"
+			
+    }
+  },
+  computed: {
+    setname() {
+      return this.goodsdata.name;
+    }
   },
   methods: {
     //编程式导航回首页
     tome() {
       this.$router.go(-1);
+    },
+    undataid() {
+      this.uid = this.$router.history.current.params.id;
+    },
+    getshopdata() {
+      let url =
+        "https://elm.cangdu.org/shopping/v2/menu?restaurant_id=" + this.uid;
+      Axios.get(url, {
+        query: {
+          restaurant_id: this.uid
+        }
+      }).then(res => {
+        this.labtitle = res.data;
+        console.log(res.data);
+      });
+    },
+    newshopdata() {
+      let url = "https://elm.cangdu.org/shopping/restaurant/" + this.uid;
+      Axios.get(url, {
+        query: {
+          restaurant_id: this.uid
+        }
+      }).then(res => {
+        this.goodsdata = res.data;
+        console.log(this.goodsdata);
+      });
+      console.log(url);
     }
+  },
+  activated() {
+    this.undataid(), this.getshopdata(), this.newshopdata();
   }
 };
 </script>
 <style>
-/* 插件加的样式 */
 .van-card__footer {
   padding-top: 0.3rem;
 }
@@ -135,8 +177,6 @@ export default {
 }
 
 .detail .header_t {
-  width: 100%;
-  height: 1rem;
   position: relative;
   background: url("//fuss10.elemecdn.com/7/63/06a2d3a322b4da10ec394e5ee79cbpng.png?imageMogr/format/webp/thumbnail/750x/thumbnail/!40p/blur/50x40/");
   background-size: 100%;
