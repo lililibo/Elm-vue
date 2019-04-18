@@ -66,7 +66,7 @@
     </section>
     <!-- 金币商城 -->
     <section class="profile-1reTe">
-      <a href="#" class="index-2MEEn">
+      <a href="https://activity.m.duiba.com.cn/chome/index#/chome/index" class="index-2MEEn">
         <i class="iconfont icon-shangcheng" style="color:rgb(148, 217, 74)"></i>
         <div class="index-yydpu">
           金币商城
