@@ -59,7 +59,7 @@ export default {
           alert("密码不正确，请重新输入");
         }
       }).catch(function(err){
-        alert(err);
+        console.log(err);
       })
     }
   },

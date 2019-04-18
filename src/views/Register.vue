@@ -65,7 +65,7 @@ export default {
           alert(res.data.msg);
         }
       }).catch(function(err){
-        alert(err);
+        console.log(err);
       })
       }
     },
