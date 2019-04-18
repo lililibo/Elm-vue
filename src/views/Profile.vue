@@ -39,14 +39,14 @@
     </router-link>
     <!-- 红包金币 -->
     <div class="index-1G7HV">
-      <a href="#" class="index-1ryAh">
+      <router-link to="/profile/benefit" class="index-1ryAh">
         <p>
           <span class="index-2FmrF" style="color: rgb(255, 95, 62);">0</span>
           <span class="index-2V-Hh" style="color: rgb(255, 95, 62);">个</span>
         </p>
         <p class="index-3S6cZ">红包</p>
-      </a>
-      <a href="#" class="index-1ryAh">
+      </router-link>
+      <a href="https://activity.m.duiba.com.cn/chome/index#/chome/index" class="index-1ryAh">
         <p>
           <span class="index-2FmrF" style="color: rgb(106, 194, 11);">0</span>
           <span class="index-2V-Hh" style="color: rgb(106, 194, 11);">个</span>
