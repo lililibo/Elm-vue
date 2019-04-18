@@ -3,31 +3,35 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 export default new VueRouter({
   routes: [
-   {
-     path: '/',
-     component: () => import('./views/Home.vue'),
-     children: [
-       {
-         path: 'me', component: () => import('./views/Me.vue'),meta:{title:'饿了么'}
-       },
-       {
-        path: 'discover', component: () => import('./views/Discover.vue'),meta:{title:'发现'}
-      },
-      {
-        path: 'order', component: () => import('./views/Order.vue'),meta:{title:'我的订单'}
-      },
-      {
-        path: 'profile', component: () => import('./views/Profile.vue'),meta:{title:'我的'}
-      },
-      {
-        path: 'city', component: () => import('./views/city.vue')
-      },
-
-      { path: '', redirect: '/me' }
-     ]
-   },
-   {
-    path: '/login', component: () => import('./views/Login.vue'),meta:{title:'登陆'}
+    {
+      path: '/',
+      component: () => import('./views/Home.vue'),
+      children: [
+        {
+          path: 'me', component: () => import('./views/Me.vue'), meta: { title: '饿了么' }
+        },
+        {
+          path: 'discover', component: () => import('./views/Discover.vue'), meta: { title: '发现' }
+        },
+        {
+          path: 'order', component: () => import('./views/Order.vue'), meta: { title: '我的订单' }
+        },
+        {
+          path: 'profile', component: () => import('./views/Profile.vue'), meta: { title: '我的' }
+        },
+        {
+          path: 'city', component: () => import('./views/city.vue')
+        },
+        {
+          path: 'service', component: () => import('./components/service.vue'),children: [
+            { path: 'agreement', component: () => import('./components/agreement.vue') }
+          ]
+        },
+        { path: '', redirect: '/me' }
+      ]
+    },
+    {
+      path: '/login', component: () => import('./views/Login.vue'), meta: { title: '登陆' }
     },
     {
       path: '/profile/info', component: () => import('./views/Info.vue')
@@ -36,8 +40,8 @@ export default new VueRouter({
       path: '/shop', component: () => import('./views/Detail.vue')
     },
     {
-      path: '/register', component: () => import('./views/Register.vue'),meta:{title:'注册'}
-      },
-   { path: '*', redirect: '/me' }
+      path: '/register', component: () => import('./views/Register.vue'), meta: { title: '注册' }
+    },
+     { path: '*', redirect: '/me' }
   ]
 })
