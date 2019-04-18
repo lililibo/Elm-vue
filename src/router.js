@@ -46,13 +46,7 @@ export default new VueRouter({
       path: '/shop/:id', name: 'detail', component: () => import('./views/Detail.vue')
     },
     {
-<<<<<<< HEAD
       path: '/register', component: () => import('./views/Register.vue'),meta:{title:'注册'}
       },
-=======
-      path: '/register', component: () => import('./views/Register.vue'), meta: { title: '注册' }
-    },
-     { path: '*', redirect: '/me' }
->>>>>>> 073eb8fcbc05cafb40f6167a6d9902856ac1b6a4
   ]
 })
