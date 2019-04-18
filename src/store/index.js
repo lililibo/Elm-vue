@@ -6,7 +6,8 @@ const store = new Vuex.Store(
         state: {
             //放数据的
             thiscity: '定位失败请手动选择',
-            geography: { x: 0, y: 0 }
+            geography: { x: 0, y: 0 },
+            shopid:1
         },
         getters: {
         },
@@ -17,6 +18,9 @@ const store = new Vuex.Store(
             },
             setgeography(state, newetgeography) {
                 state.geography=newetgeography
+            },
+            setshopid(state,newshopid){
+                state.shopid=newshopid
             }
         },
         actions: {

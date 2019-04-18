@@ -160,7 +160,7 @@ export default {
         }
       }
     },
-    
+
   },
   activated() {
     this.isLogin();
