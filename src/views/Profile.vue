@@ -58,10 +58,10 @@
     <section class="profile-1reTe">
       <a href="#" class="index-2MEEn">
         <i class="iconfont icon-dizhi" style="color:rgb(74, 165, 240);"></i>
-        <div class="index-yydpu">
+        <router-link to="/profile/address" class="index-yydpu">
           我的地址
           <i class="iconfont icon-right"></i>
-        </div>
+        </router-link>
       </a>
     </section>
     <!-- 金币商城 -->
@@ -97,13 +97,13 @@
           <i class="iconfont icon-right"></i>
         </div>
       </a>
-      <a href="#" class="index-2MEEn">
+      <router-link  to="/service/agreement" class="index-2MEEn">
         <i class="iconfont icon-guize" style="color:rgb(74, 165, 240)"></i>
         <div class="index-yydpu">
           规则中心
           <i class="iconfont icon-right"></i>
         </div>
-      </a>
+        </router-link>
     </section>
     <!-- 隐私政策 -->
     <div class="profile-2dyk_">
