@@ -4,9 +4,9 @@ import router from './router'
 import store from './store/index'
 import 'vant/lib/button/style';
 
-import { Collapse, CollapseItem } from 'vant';
+import { Collapse, CollapseItem, CouponCell, CouponList } from 'vant';
 
-Vue.use(Collapse).use(CollapseItem);
+Vue.use(Collapse).use(CollapseItem).use(CouponCell).use(CouponList);
 
 import { AddressList,NavBar } from 'vant'
 Vue.use(AddressList).use(NavBar)

@@ -37,14 +37,22 @@ export default new VueRouter({
       path: '/profile/address', component: () => import('./views/Address.vue')
     },
     {
+      path: '/profile/benefit', component: () => import('./views/Benefit.vue')
+    },
+    {
+      path: '/commend', component: () => import('./views/Commend.vue'),meta:{title:'推荐有奖'}
+    },
+    {
+      path: '/mservice', component: () => import('./views/Service.vue'),meta:{title:'我的客服'}
+    },
+    {
       path: '/profile/info', component: () => import('./views/Info.vue')
     },
     {
       path: '/shop/:id', name: 'detail', component: () => import('./views/Detail.vue')
     },
     {
-      path: '/register', component: () => import('./views/Register.vue'), meta: { title: '注册' }
-    },
-     { path: '*', redirect: '/me' }
+      path: '/register', component: () => import('./views/Register.vue'),meta:{title:'注册'}
+      },
   ]
 })

@@ -77,7 +77,7 @@ export default {
       localStorage.removeItem("username");
       localStorage.removeItem("phone");
       localStorage.removeItem("password");
-      this.$router.push("/me");
+      this.$router.push("/profile");
     }
   },
   activated() {

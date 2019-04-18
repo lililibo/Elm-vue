@@ -39,14 +39,14 @@
     </router-link>
     <!-- 红包金币 -->
     <div class="index-1G7HV">
-      <a href="#" class="index-1ryAh">
+      <router-link to="/profile/benefit" class="index-1ryAh">
         <p>
           <span class="index-2FmrF" style="color: rgb(255, 95, 62);">0</span>
           <span class="index-2V-Hh" style="color: rgb(255, 95, 62);">个</span>
         </p>
         <p class="index-3S6cZ">红包</p>
-      </a>
-      <a href="#" class="index-1ryAh">
+      </router-link>
+      <a href="https://activity.m.duiba.com.cn/chome/index#/chome/index" class="index-1ryAh">
         <p>
           <span class="index-2FmrF" style="color: rgb(106, 194, 11);">0</span>
           <span class="index-2V-Hh" style="color: rgb(106, 194, 11);">个</span>
@@ -66,16 +66,16 @@
     </section>
     <!-- 金币商城 -->
     <section class="profile-1reTe">
-      <a href="#" class="index-2MEEn">
+      <a href="https://activity.m.duiba.com.cn/chome/index#/chome/index" class="index-2MEEn">
         <i class="iconfont icon-shangcheng" style="color:rgb(148, 217, 74)"></i>
         <div class="index-yydpu">
           金币商城
           <i class="iconfont icon-right"></i>
         </div>
       </a>
-      <a href="#" class="index-2MEEn">
+      <a class="index-2MEEn">
         <i class="iconfont icon-liwu" style="color:rgb(252, 123, 83)"></i>
-        <div class="index-yydpu">
+        <div class="index-yydpu" @click="commend">
           分享拿10元现金
           <i class="iconfont icon-right"></i>
         </div>
@@ -83,9 +83,9 @@
     </section>
     <!-- 我的客服 -->
     <section class="profile-1reTe">
-      <a href="#" class="index-2MEEn">
+      <a class="index-2MEEn">
         <i class="iconfont icon-erji" style="color:rgb(74, 165, 240)"></i>
-        <div class="index-yydpu">
+        <div class="index-yydpu" @click="service">
           我的客服
           <i class="iconfont icon-right"></i>
         </div>
@@ -97,13 +97,13 @@
           <i class="iconfont icon-right"></i>
         </div>
       </a>
-      <router-link  to="/service/agreement" class="index-2MEEn">
+      <router-link to="/service/agreement" class="index-2MEEn">
         <i class="iconfont icon-guize" style="color:rgb(74, 165, 240)"></i>
         <div class="index-yydpu">
           规则中心
           <i class="iconfont icon-right"></i>
         </div>
-        </router-link>
+      </router-link>
     </section>
     <!-- 隐私政策 -->
     <div class="profile-2dyk_">
@@ -145,7 +145,7 @@ export default {
                 var myphone = phone.substr(3, 4);
                 var lphone = phone.replace(myphone, "****");
                 _this.phone = lphone;
-              } else if(res.data.code==-1) {
+              } else if (res.data.code == -1) {
                 //console.log(res.data.msg);
                 _this.username = "";
                 _this.phone = "";
@@ -156,11 +156,32 @@ export default {
             });
         } else {
           this.username = "";
-          this.phone="";
+          this.phone = "";
         }
       }
     },
+<<<<<<< HEAD
 
+=======
+    //点击分享拿10元现金
+    commend: function() {
+      this.isLogin();
+      if (this.username == "") {
+        this.$router.push("/login");
+      } else {
+        this.$router.push("/commend");
+      }
+    },
+    //点击我的客服
+    service: function() {
+      this.isLogin();
+      if (this.username == "") {
+        this.$router.push("/login");
+      } else {
+        this.$router.push("/mservice");
+      }
+    }
+>>>>>>> 0072ac2fa08fd81c88e9cabb1d24cd602460a43e
   },
   activated() {
     this.isLogin();
