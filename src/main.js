@@ -8,6 +8,9 @@ import { Collapse, CollapseItem } from 'vant';
 
 Vue.use(Collapse).use(CollapseItem);
 
+import { AddressList,NavBar } from 'vant'
+Vue.use(AddressList).use(NavBar)
+
 router.beforeEach((to, from, next) => {
   /* 路由发生变化修改页面title */
   if (to.meta.title) {

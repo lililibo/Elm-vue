@@ -3,7 +3,7 @@
     <!--头部-->
 		<div class="header">
 			<div class="header_t">
-				<a href="#"><i class="iconfont icon-fanhui"></i></a>
+				<a><i @click="tome" class="iconfont icon-fanhui"></i></a>
 				<img src="//fuss10.elemecdn.com/7/63/06a2d3a322b4da10ec394e5ee79cbpng.png?imageMogr/format/webp/thumbnail/150x/" />
 			</div>
 			<div class="header_b">
@@ -84,6 +84,16 @@
   </div>
 </template>
 
+<script>
+export default {
+	methods: {
+		//编程式导航回首页
+		tome () {
+			this.$router.go(-1)
+		}
+	}
+}
+</script>
 <style>
 .detail .header_t{
 	width: 100%;

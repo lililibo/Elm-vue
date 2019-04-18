@@ -34,10 +34,13 @@ export default new VueRouter({
       path: '/login', component: () => import('./views/Login.vue'), meta: { title: '登陆' }
     },
     {
+      path: '/profile/address', component: () => import('./views/Address.vue')
+    },
+    {
       path: '/profile/info', component: () => import('./views/Info.vue')
     },
     {
-      path: '/shop', component: () => import('./views/Detail.vue')
+      path: '/shop/:id', name: 'detail', component: () => import('./views/Detail.vue')
     },
     {
       path: '/register', component: () => import('./views/Register.vue'), meta: { title: '注册' }

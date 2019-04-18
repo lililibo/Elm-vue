@@ -58,10 +58,10 @@
     <section class="profile-1reTe">
       <a href="#" class="index-2MEEn">
         <i class="iconfont icon-dizhi" style="color:rgb(74, 165, 240);"></i>
-        <div class="index-yydpu">
+        <router-link to="/profile/address" class="index-yydpu">
           我的地址
           <i class="iconfont icon-right"></i>
-        </div>
+        </router-link>
       </a>
     </section>
     <!-- 金币商城 -->
@@ -152,14 +152,15 @@ export default {
               }
             })
             .catch(function(err) {
-              alert(err);
+              console.log(err);
             });
         } else {
           this.username = "";
           this.phone="";
         }
       }
-    }
+    },
+    
   },
   activated() {
     this.isLogin();
