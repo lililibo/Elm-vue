@@ -27,7 +27,10 @@ export default new VueRouter({
      ]
    },
    {
-    path: '/login', component: () => import('./views/Login.vue'),meta:{title:'登陆'}
+      path: '/login', component: () => import('./views/Login.vue'),meta:{title:'登陆'}
+    },
+    {
+      path: '/commend', component: () => import('./views/Commend.vue'),meta:{title:'推荐有奖'}
     },
     {
       path: '/profile/info', component: () => import('./views/Info.vue')

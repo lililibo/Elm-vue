@@ -75,7 +75,7 @@
       </a>
       <a href="#" class="index-2MEEn">
         <i class="iconfont icon-liwu" style="color:rgb(252, 123, 83)"></i>
-        <div class="index-yydpu">
+        <div class="index-yydpu" @click="commend">
           分享拿10元现金
           <i class="iconfont icon-right"></i>
         </div>
@@ -158,6 +158,15 @@ export default {
           this.username = "";
           this.phone="";
         }
+      }
+    },
+    //点击分享拿10元现金
+    commend: function(){
+      this.isLogin();
+      if(this.username==""){
+        this.$router.replace("/login")
+      }else{
+        this.$router.replace("/commend")
       }
     }
   },
