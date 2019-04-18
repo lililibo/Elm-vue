@@ -37,6 +37,9 @@ export default new VueRouter({
       path: '/profile/address', component: () => import('./views/Address.vue')
     },
     {
+      path: '/profile/benefit', component: () => import('./views/Benefit.vue')
+    },
+    {
       path: '/commend', component: () => import('./views/Commend.vue'),meta:{title:'推荐有奖'}
     },
     {
