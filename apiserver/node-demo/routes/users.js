@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 const db = require("../config/db.js");
 const usermodel = require("../models/usermodel.js");
+const path = require("path");
+const fs = require("fs");
+const multer = require('multer');
+const upload = multer({ dest: 'c:/tmp' });
 
 //注册http://localhost:3000/users/register
 router.get('/register', function (req, res, next) {
@@ -91,18 +95,18 @@ router.get("/usernameyz", function (req, res, next) {
     username: username
   })
     .then(function (data) {
-      console.log(data);
+      //console.log(data);
       if (data) {
         console.log("用户名存在");
         res.send({
-          code:0,
-          msg:"用户名存在"
+          code: 0,
+          msg: "用户名存在"
         })
       } else {
         console.log("用户名不存在");
         res.send({
-          code:-1,
-          msg:"用户名不存在"
+          code: -1,
+          msg: "用户名不存在"
         })
       }
     })
@@ -113,6 +117,44 @@ router.get("/usernameyz", function (req, res, next) {
         msg: "校验用户名失败"
       });
     });
+});
+
+
+//修改用户信息http://localhost:3000/users/updateAvator
+router.post("/updateAvator", upload.single("avator"), function (req, res, next) {
+  //先找到用户
+  //console.log(req.body.username);
+  const newFileName = new Date().getTime() + '_' + req.file.originalname;
+  const newFilePath = path.resolve(__dirname, '../public/', newFileName);
+  const fileData = fs.readFileSync(req.file.path);
+  fs.writeFileSync(newFilePath, fileData);
+  //找到用户
+  usermodel.findOne({
+    username: req.body.username
+  }).then(function (finddata) {
+    console.log(finddata);
+    // 修改数据库
+    usermodel.updateOne({
+      username: req.body.username
+    }, {
+        avator: newFileName,
+      }).then(data => {
+        console.log(data);
+        if (data.nModified == 1) {
+          res.send({
+            code: 0,
+            msg: '上传成功',
+            avator: finddata.avator
+          });
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+  }).catch(function (err) {
+    console.log(err);
+  })
+
+
 });
 module.exports = router;
 

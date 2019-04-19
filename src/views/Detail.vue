@@ -59,24 +59,40 @@
       <div class="shangpinr">
         <ul>
           <li>
-            <a href="#">
-              <img
-                src="//fuss10.elemecdn.com/6/a6/07780287ee18bf351cfa48f02b637jpeg.jpeg?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/"
-              >
-              <div class="shangpinr1">
-                <div class="shangpinr11">大脸鸡排+饮品</div>
-                <div class="shangpinr12">7.8折起</div>
-                <div class="shangpinr13">￥19.5起</div>
+            <van-card tag="标签" price="2.00" desc="描述信息" title="商品标题" :thumb="imageURL">
+              <div slot="footer">
+                <van-button size="mini">-</van-button>
+                <van-button size="mini">+</van-button>
               </div>
-              <button>+</button>
-            </a>
+            </van-card>
+
+            <!-- <img src="//fuss10.elemecdn.com/6/a6/07780287ee18bf351cfa48f02b637jpeg.jpeg?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/" />
+							<div class="shangpinr1">
+								<div class="shangpinr11">
+									大脸鸡排+饮品
+								</div>
+								<div class="shangpinr12">
+									7.8折起
+								</div>
+								<div class="shangpinr13">
+									￥19.5起
+								</div>
+							</div>
+            <button>+</button>-->
           </li>
         </ul>
       </div>
     </div>
     <!--底部-->
     <div class="footer">
-      <div class="footerl">
+      <van-goods-action class="bottom">
+        <van-goods-action-mini-btn icon="cart-o" text="购物车" :info="5" @click="show = !show"/>
+        <!-- <van-goods-action-mini-btn icon="cart-o" text="购物车"/> -->
+        <van-goods-action-big-btn primary text="立即购买"/>
+      </van-goods-action>
+      <!-- 弹出层 -->
+      <van-popup v-model="show" position="bottom">hello</van-popup>
+      <!-- <div class="footerl">
         <i class="iconfont icon-gouwuchekong"></i>
         <div>
           <span>未选购商品</span>
@@ -84,7 +100,7 @@
           <span>另需配送费3.5元</span>
         </div>
       </div>
-      <div class="footerr">￥20起送</div>
+      <div class="footerr">￥20起送</div>-->
     </div>
   </div>
 </template>
@@ -94,12 +110,16 @@ import Axios from "axios";
 export default {
   data() {
     return {
-      uid: 1,
+			show: false,
+			//商家名称
+			uid: 1,
       sid: "",
       labtitle: {},
-      goodsdata: {}
-      //商家名称
-    };
+      goodsdata: {},
+      imageURL:
+				"//fuss10.elemecdn.com/6/a6/07780287ee18bf351cfa48f02b637jpeg.jpeg?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/"
+			
+    }
   },
   computed: {
     setname() {
@@ -145,11 +165,34 @@ export default {
 };
 </script>
 <style>
-.detail .header_t {
+body{
+  height: 100%;
+}
+.van-card__footer {
+  padding-top: 0.3rem;
+}
+.van-card {
   width: 100%;
-  height: 1rem;
+  height: 100%;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.detail .header{
+  width: 100%;
+}
+.detail .header_t {
   position: relative;
-  background: url("//fuss10.elemecdn.com/7/63/06a2d3a322b4da10ec394e5ee79cbpng.png?imageMogr/format/webp/thumbnail/750x/thumbnail/!40p/blur/50x40/");
+  height: 1rem;
+  background: url("//fuss10.elemecdn.com/7/63/06a2d3a322b4da10ec394e5ee79cbpng.png?imageMogr/format/webp/thumbnail/750x/thumbnail/!40p/blur/50x40/") ;
   background-size: 100%;
   margin-bottom: 0.26rem;
 }
@@ -165,7 +208,7 @@ export default {
   box-shadow: 0 0 0.4vw 0 rgba(0, 0, 0, 0.2);
   position: absolute;
   top: 0.42rem;
-  left: 1.5rem;
+  left: 1.4rem;
 }
 .detail .header_b {
   padding: 0 0.38rem 0;
@@ -197,8 +240,10 @@ export default {
 }
 .detail .banner {
   height: 0.4rem;
+  width: 100%;
   padding: 0 0.48rem 0;
-  margin-top: 0.24rem;
+  margin-top: 0.14rem;
+  margin-bottom: .1rem;
 }
 .detail .banner ul {
   display: flex;
@@ -231,15 +276,15 @@ export default {
   flex: 1;
   padding-right: 0.15rem;
 }
-.detail .shangpinr ul li a {
+.detail .shangpinr ul li {
   display: flex;
   justify-content: space-between;
 }
-.detail .shangpinr ul li a img {
+.detail .shangpinr ul li img {
   width: 0.95rem;
   height: 0.95rem;
 }
-.detail .shangpinr11 {
+/* .detail .shangpinr11 {
   color: #333333;
   margin-bottom: 0.2rem;
 }
@@ -257,9 +302,9 @@ export default {
   font-size: 0.2rem;
   color: white;
   background: #2395ff;
-}
+} */
 /*底部*/
-.detail .footer {
+/* .detail .footer {
   height: 0.48rem;
   display: flex;
   width: 100%;
@@ -296,5 +341,5 @@ export default {
   text-align: center;
   line-height: 0.48rem;
   font-size: 0.13rem;
-}
+} */
 </style>

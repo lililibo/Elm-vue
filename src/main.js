@@ -4,11 +4,15 @@ import router from './router'
 import store from './store/index'
 import 'vant/lib/button/style';
 
-import { Collapse, CollapseItem, CouponCell, CouponList } from 'vant';
+import { Collapse, CollapseItem, CouponCell, CouponList, Card, Popup, GoodsAction, GoodsActionBigBtn, GoodsActionMiniBtn, Button  } from 'vant';
 
+<<<<<<< HEAD
 Vue.use(Collapse).use(CollapseItem).use(CouponCell).use(CouponList);
 import { Cell, CellGroup } from 'vant';
 Vue.use(Cell).use(CellGroup)
+=======
+Vue.use(Collapse).use(CollapseItem).use(CouponCell).use(CouponList).use(Card).use(Popup).use(GoodsAction).use(GoodsActionBigBtn).use(GoodsActionMiniBtn).use(Button);
+>>>>>>> 8b31b5f908279d11a7e4f8b8e869343539e04a12
 
 import { AddressList,NavBar } from 'vant'
 Vue.use(AddressList).use(NavBar)
