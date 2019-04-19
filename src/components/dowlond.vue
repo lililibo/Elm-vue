@@ -22,7 +22,7 @@ export default {
 <style scoped>
 .centimg {
   position: absolute;
-  top: 20%;
+  top: 150px;
   width: 200px;
   height: 200px;
   left: 0;
@@ -31,7 +31,7 @@ export default {
 }
 .btnset {
   position: absolute;
-  top: 55%;
+  top: 400px;
   left: 0;
   right: 0;
   width: 100px;
