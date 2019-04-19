@@ -60,7 +60,8 @@ export default {
       }).then(function(res){
         //console.log(res,tata);
         if(res.data.code==0){
-          _this.$router.replace("/login")
+          alert("注册成功");
+          _this.$router.go(-1);
         }else{
           alert(res.data.msg);
         }
