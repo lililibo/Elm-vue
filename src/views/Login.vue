@@ -57,12 +57,8 @@ export default {
             localStorage.setItem("username", res.data.username);
             localStorage.setItem("phone", res.data.phone);
             //localStorage存储后再跳转
-            if(localStorage){
-              if(localStorage.getItem("username")&& localStorage.getItem("phone")){
-                alert("登陆成功");
-                _this.$router.go(-1);
-              }
-            }
+            alert("登陆成功");
+            _this.$router.go(-1);
           } else if (res.data.code == -2) {
             alert("用户名不存在，请重新输入");
           } else if (res.data.code == -3) {
