@@ -146,6 +146,10 @@ export default {
                 var myphone = phone.substr(3, 4);
                 var lphone = phone.replace(myphone, "****");
                 _this.phone = lphone;
+                //如果头像有修改
+                if(res.data.avator!='images/avator.png'){
+                  _this.avator = "http://localhost:3000/" + res.data.avator;
+                }
               } else if (res.data.code == -1) {
                 //console.log(res.data.msg);
                 _this.username = "";

@@ -61,6 +61,7 @@ export default {
         //console.log(res,tata);
         if(res.data.code==0){
           alert("注册成功");
+          _this.$router.replace("/login");
           _this.$router.go(-1);
         }else{
           alert(res.data.msg);

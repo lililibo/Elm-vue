@@ -100,7 +100,11 @@ router.get("/usernameyz", function (req, res, next) {
         console.log("用户名存在");
         res.send({
           code: 0,
-          msg: "用户名存在"
+          msg: "用户名存在",
+          avator:data.avator,
+          username:data.username,
+          phone:data.phone,
+          address:data.address
         })
       } else {
         console.log("用户名不存在");
@@ -191,6 +195,35 @@ router.post("/updateUname", function (req, res, next) {
     console.log(err);
   })
 })
+//增加地址http://localhost:3000/users/addaddress
+router.post("/addaddress",function(req,res,next){
+  console.log(req.body);
+  usermodel.findOne({
+    username:req.body.username
+  }).then(function(data){
+    console.log(data);
+    if(data){
+      usermodel.updateOne({
+        username:req.body.username
+      },{
+        address:req.body.list
+      }).then(function(data1){
+        console.log(data1);
+        if(data1.nModified==1){
+          res.send({
+            code:0,
+            msg:"地址添加成功"
+          })
+        }
+      }).catch(function(errs){
+        console.log(errs);
+      })
+    }
+  }).catch(function(err){
+    console.log(err);
+  })
+})
+
 
 module.exports = router;
 

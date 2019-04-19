@@ -38,6 +38,9 @@ export default new VueRouter({
       path: '/profile/address', component: () => import('./views/Address.vue')
     },
     {
+      path: '/profile/address/add', component: () => import('./views/addAddress.vue'), meta: { title: '我的地址' }
+    },
+    {
       path: '/profile/benefit', component: () => import('./views/Benefit.vue')
     },
     {

@@ -8,6 +8,9 @@ const schema=new db.Schema({
         default:function(){
             return "images/avator.png";
         }
+    },
+    address:{
+        type:Array,
     }
 });
 module.exports=db.model("user",schema);
