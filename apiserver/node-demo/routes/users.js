@@ -120,7 +120,7 @@ router.get("/usernameyz", function (req, res, next) {
 });
 
 
-//修改用户信息http://localhost:3000/users/updateAvator
+//修改用户头像http://localhost:3000/users/updateAvator
 router.post("/updateAvator", upload.single("avator"), function (req, res, next) {
   //先找到用户
   //console.log(req.body.username);
@@ -153,8 +153,44 @@ router.post("/updateAvator", upload.single("avator"), function (req, res, next) 
   }).catch(function (err) {
     console.log(err);
   })
-
-
 });
+
+//修改用户名http://localhost:3000/users/updateUname
+router.post("/updateUname", function (req, res, next) {
+  //console.log(req.body);
+  //新用户名要不存在
+  usermodel.findOne({
+    username: req.body.newusername
+  }).then(function (data) {
+    //console.log(data);
+    if (!data) {
+      //更新数据库
+      usermodel.updateOne({
+        username: req.body.username
+      }, {
+          username: req.body.newusername
+        }).then(function (data) {
+          if(data.nModified==1){
+            console.log("修改用户名成功")
+            res.send({
+              code:0,
+              username:req.body.newusername,
+              msg:"修改用户名成功"
+            })
+          }
+        }).catch(function (err) {
+          console.log(err);
+        })
+    } else {
+      res.send({
+        code: -1,
+        msg: "用户名已存在"
+      })
+    }
+  }).catch(function (err) {
+    console.log(err);
+  })
+})
+
 module.exports = router;
 

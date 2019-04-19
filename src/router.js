@@ -47,7 +47,10 @@ export default new VueRouter({
       path: '/mservice', component: () => import('./views/Service.vue'),meta:{title:'我的客服'}
     },
     {
-      path: '/profile/info', component: () => import('./views/Info.vue'),meta:{title:'账户信息'}
+      path: '/profile/info', component: () => import('./views/Info.vue'),meta:{title:'账户信息'},
+    },
+    {
+      path: '/profile/info/username', component: () => import('./views/Username.vue'),meta:{title:'账户信息'},
     },
     {
       path: '/shop/:id', name: 'detail', component: () => import('./views/Detail.vue')

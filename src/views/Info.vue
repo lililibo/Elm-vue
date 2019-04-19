@@ -18,13 +18,13 @@
             <i class="iconfont icon-right"></i>
           </span>
         </li>
-        <li class="main-3Idiu">
+        <router-link to="/profile/info/username" class="main-3Idiu" tag="li">
           <b>用户名</b>
           <span class="main-2cJz_">
             {{username}}
             <i class="iconfont icon-right"></i>
           </span>
-        </li>
+        </router-link>
       </ul>
       <h2 class="main-1OkSR">账号绑定</h2>
       <ul class="main-22cQX">
@@ -105,6 +105,10 @@ export default {
           }
         }
       });
+    },
+    //修改用户名
+    changeUname: function(){
+
     },
     //退出登陆
     logOut: function() {
