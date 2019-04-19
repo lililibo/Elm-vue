@@ -7,23 +7,23 @@
           <a>
             <i @click="tome" class="iconfont icon-fanhui"></i>
           </a>
-          <img :src="'//elm.cangdu.org/img/'+goodsdata.image_path">
+          <img :src="'//elm.cangdu.org/img/'+sellerdata.image_path">
         </div>
         <div class="header_b">
           <div class="header_b1">
-            {{setname}}
+            {{ sellerdata.name }}
             <i class="iconfont icon-sanjiaoright"></i>
           </div>
           <div class="header_b2">
-            <span>评价5.0</span>
-            <span>月售40单</span>
-            <span>蜂鸟快送</span>
-            <span>约40分钟</span>
+            <span>评价： {{ sellerdata.rating }}</span>
+            <span> 月售{{sellerdata.recent_order_num}}单 </span>
+            <span> 蜂鸟专送</span>
+            <span> {{ sellerdata.order_lead_time}}</span>
           </div>
           <div class="header_b3">
             <div class="header_b31">
               <span>满减</span>
-              <span>满10减5，满25减8，满40减15</span>
+              <span>: 满10减5，满25减8，满40减15</span>
             </div>
             <div class="header_b32">
               <span>
@@ -32,7 +32,7 @@
               </span>
             </div>
           </div>
-          <div class="header_b4">公告：欢迎光临，用餐高峰期请提前下单，谢谢。</div>
+          <div class="header_b4">公告：{{ sellerdata.promotion_info }}。</div>
         </div>
       </div>
       <!--导航-->
@@ -45,35 +45,40 @@
       </div>
       <!--商品-->
       <div class="shangpin">
+        <!-- 商品分类列表 -->
         <div class="shangpinl">
           <ul>
             <li
               class="shangpinl_active"
-              v-for="litem in labtitle"
-              :key="litem.id"
-              @click="setindex(litem)"
+              v-for="(item,index) in goodsdata"
+              :key="index"
+              @click="setindex(item)"
             >
               <a>
                 <i class="iconfont icon-youhui"></i>
-                {{litem.name}}
+                {{item.name}}
               </a>
             </li>
           </ul>
         </div>
+
+
+        <!-- 商品列表 -->
         <div class="shangpinr">
           <ul class="goodsui">
-            <li v-for="itemlist in goodslist" :key="itemlist.item_id">
+            <li v-for="itemlist in goodslist" :key="itemlist.item_id" :id="itemlist.item_id">
               <van-card
                 :key="1"
                 tag="标签"
-                :price="2.00"
+                :price="itemlist.specfoods[0].price"
                 :desc="itemlist.description"
                 :title="itemlist.name"
                 :thumb="'//elm.cangdu.org/img/'+itemlist.image_path"
               >
                 <div slot="footer">
-                  <van-button size="mini">-</van-button>
-                  <van-button size="mini">+</van-button>
+                  <van-button size="mini" @click='fn2(itemlist.item_id)'>-</van-button>
+                  <span class="sum" :id="'n'+itemlist.item_id">0</span>
+                  <van-button size="mini" @click='fn1(itemlist.item_id)'>+</van-button>
                 </div>
               </van-card>
             </li>
@@ -81,9 +86,11 @@
         </div>
       </div>
     </div>
+
+
     <!--底部-->
     <div class="footer">
-      <van-goods-action-mini-btn icon="cart-o" text="购物车" :info="5" @click="show = !show"/>
+      <van-goods-action-mini-btn icon="cart-o" text="购物车" :info='this.$store.getters.goodCatNums' @click="show = !show"/>
       <van-goods-action-big-btn primary text="立即购买"/>
       <!-- 弹出层 -->
       <van-popup v-model="show" position="bottom">hello</van-popup>
@@ -100,61 +107,71 @@ export default {
       //商家名称
       uid: 1,
       sid: "",
-      labtitle: {},
-      goodsdata: {},
-      goodslist: {}
+      goodsdata: [],
+      sellerdata: {},
+      goodslist: []
     };
   },
-  computed: {
-    setname() {
-      return this.goodsdata.name;
-    },
-    newgoods() {
-      return this.goodslist;
-    }
-  },
   methods: {
+    fn1(shopid){
+      this.$store.commit("catAdd", shopid);
+      var e=this.$store.state.goodsstdata;
+      var num =0;
+      for(var i=0;i<e.length;i++){
+        if(e[i].goods == shopid){
+          num=e[i].num
+        }
+      }
+      document.getElementById('n'+shopid).innerHTML=num;
+      console.log(this.$store.getters.goodCatNums)
+    },
+    fn2(shopid){
+      this.$store.commit("catReduce", shopid);
+      var e=this.$store.state.goodsstdata;
+      var num =0;
+      for(var i=0;i<e.length;i++){
+        if(e[i].goods == shopid){
+          num=e[i].num
+        }
+      }
+      document.getElementById('n'+shopid).innerHTML=num;
+      console.log(this.$store.getters.goodCatNums)
+    },
+    numsum(){
+      return this.$store.state.goodCatNums;
+    },
     //编程式导航回首页
     tome() {
       this.$router.go(-1);
     },
+    //点击获取商品分类信息
     setindex(eltem) {
       this.goodslist = eltem.foods;
-      console.log(this.goodslist);
     },
+    //得到商铺id
     undataid() {
       this.uid = this.$router.history.current.params.id;
     },
+    //得到商品分类信息
     getshopdata() {
-      let url =
-        "https://elm.cangdu.org/shopping/v2/menu?restaurant_id=" + this.uid;
-      Axios.get(url, {
-        query: {
+      Axios.get("https://elm.cangdu.org/shopping/v2/menu", {
+        params: {
           restaurant_id: this.uid
         }
       }).then(res => {
-        this.labtitle = res.data;
-        if ((this.goodslist = res.data[1].foods)) {
-          this.goodslist = res.data[1].foods;
-        }
-
-        console.log(1, res.data);
-      });
+        this.goodsdata = res.data
+        this.goodslist = res.data[0].foods
+      })
     },
+    //得到商铺信息
     newshopdata() {
-      let url = "//elm.cangdu.org/shopping/restaurant/" + this.uid;
-      Axios.get(url, {
-        query: {
-          restaurant_id: this.uid
-        }
-      }).then(res => {
-        console.log(res.data);
-        this.goodsdata = res.data;
-      });
+      Axios.get("https://elm.cangdu.org/shopping/restaurant/" + this.uid ).then(res => {
+        this.sellerdata = res.data
+      })
     }
   },
   activated() {
-    this.undataid(), this.getshopdata(), this.newshopdata();
+     this.undataid(), this.getshopdata(), this.newshopdata()
   }
 };
 </script>
@@ -196,6 +213,9 @@ body {
   background: url("//fuss10.elemecdn.com/7/63/06a2d3a322b4da10ec394e5ee79cbpng.png?imageMogr/format/webp/thumbnail/750x/thumbnail/!40p/blur/50x40/");
   background-size: 100%;
   margin-bottom: 0.26rem;
+}
+.van-button--mini {
+  font-size: 16px;
 }
 .detail .header_t a {
   position: absolute;
@@ -279,7 +299,7 @@ body {
   flex: 1;
   padding-right: 8px;
 }
-.van-card__header{
+.van-card__header {
   max-width: 170px;
 }
 .detail .shangpinr ul li {
