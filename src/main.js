@@ -4,9 +4,9 @@ import router from './router'
 import store from './store/index'
 import 'vant/lib/button/style';
 
-import { Collapse, CollapseItem, CouponCell, CouponList, Card, Popup, GoodsAction, GoodsActionBigBtn, GoodsActionMiniBtn, Button, Cell, CellGroup, AddressList, NavBar } from 'vant';
+import { Collapse, CollapseItem, CouponCell, CouponList, Card, Popup, GoodsAction, GoodsActionBigBtn, GoodsActionMiniBtn, Button, Cell, CellGroup, AddressList, NavBar,Stepper } from 'vant';
 
-Vue.use(Collapse).use(CollapseItem).use(CouponCell).use(CouponList).use(Card).use(Popup).use(GoodsAction).use(GoodsActionBigBtn).use(GoodsActionMiniBtn).use(Button).use(Cell).use(CellGroup).use(AddressList).use(NavBar);
+Vue.use(Collapse).use(CollapseItem).use(CouponCell).use(CouponList).use(Card).use(Popup).use(GoodsAction).use(GoodsActionBigBtn).use(GoodsActionMiniBtn).use(Button).use(Cell).use(CellGroup).use(AddressList).use(NavBar).use(Stepper);
 
 //按钮
 

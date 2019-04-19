@@ -62,18 +62,19 @@
         </div>
         <div class="shangpinr">
           <ul class="goodsui">
-            <li v-for="itemlist in goodslist" :key="itemlist.item_id">
+            <li v-for="itemlist in goodslist" :key="itemlist.item_id" :id="itemlist.item_id">
               <van-card
                 :key="1"
                 tag="标签"
-                :price="2.00"
+                :price="itemlist.specfoods[0].price"
                 :desc="itemlist.description"
                 :title="itemlist.name"
                 :thumb="'//elm.cangdu.org/img/'+itemlist.image_path"
               >
                 <div slot="footer">
-                  <van-button size="mini">-</van-button>
-                  <van-button size="mini">+</van-button>
+                  <van-button size="mini" @click='fn2(itemlist.item_id)'>-</van-button>
+                  <span class="sum" :id="'n'+itemlist.item_id">0</span>
+                  <van-button size="mini" @click='fn1(itemlist.item_id)'>+</van-button>
                 </div>
               </van-card>
             </li>
@@ -83,7 +84,7 @@
     </div>
     <!--底部-->
     <div class="footer">
-      <van-goods-action-mini-btn icon="cart-o" text="购物车" :info="5" @click="show = !show"/>
+      <van-goods-action-mini-btn icon="cart-o" text="购物车" :info='this.$store.getters.goodCatNums' @click="show = !show"/>
       <van-goods-action-big-btn primary text="立即购买"/>
       <!-- 弹出层 -->
       <van-popup v-model="show" position="bottom">hello</van-popup>
@@ -102,7 +103,8 @@ export default {
       sid: "",
       labtitle: {},
       goodsdata: {},
-      goodslist: {}
+      goodslist: {},
+      value1:0
     };
   },
   computed: {
@@ -114,13 +116,39 @@ export default {
     }
   },
   methods: {
+    fn1(shopid){
+      this.$store.commit("catAdd", shopid);
+      var e=this.$store.state.goodsstdata;
+      var num =0;
+      for(var i=0;i<e.length;i++){
+        if(e[i].goods == shopid){
+          num=e[i].num
+        }
+      }
+      document.getElementById('n'+shopid).innerHTML=num;
+      console.log(this.$store.getters.goodCatNums)
+    },
+    fn2(shopid){
+      this.$store.commit("catReduce", shopid);
+      var e=this.$store.state.goodsstdata;
+      var num =0;
+      for(var i=0;i<e.length;i++){
+        if(e[i].goods == shopid){
+          num=e[i].num
+        }
+      }
+      document.getElementById('n'+shopid).innerHTML=num;
+      console.log(this.$store.getters.goodCatNums)
+    },
+    numsum(){
+      return this.$store.state.goodCatNums;
+    },
     //编程式导航回首页
     tome() {
       this.$router.go(-1);
     },
     setindex(eltem) {
       this.goodslist = eltem.foods;
-      console.log(this.goodslist);
     },
     undataid() {
       this.uid = this.$router.history.current.params.id;
@@ -137,8 +165,6 @@ export default {
         if ((this.goodslist = res.data[1].foods)) {
           this.goodslist = res.data[1].foods;
         }
-
-        console.log(1, res.data);
       });
     },
     newshopdata() {
@@ -148,7 +174,6 @@ export default {
           restaurant_id: this.uid
         }
       }).then(res => {
-        console.log(res.data);
         this.goodsdata = res.data;
       });
     }
@@ -196,6 +221,9 @@ body {
   background: url("//fuss10.elemecdn.com/7/63/06a2d3a322b4da10ec394e5ee79cbpng.png?imageMogr/format/webp/thumbnail/750x/thumbnail/!40p/blur/50x40/");
   background-size: 100%;
   margin-bottom: 0.26rem;
+}
+.van-button--mini {
+  font-size: 16px;
 }
 .detail .header_t a {
   position: absolute;
@@ -279,7 +307,7 @@ body {
   flex: 1;
   padding-right: 8px;
 }
-.van-card__header{
+.van-card__header {
   max-width: 170px;
 }
 .detail .shangpinr ul li {
