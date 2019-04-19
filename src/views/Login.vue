@@ -50,9 +50,10 @@ export default {
       }).then(function(res){
         //console.log(res.data);
         if(res.data.code==0){
-          _this.$router.go(-1);
+          alert("登陆成功");
           localStorage.setItem("username",res.data.username);
           localStorage.setItem("phone",res.data.phone);
+          _this.$router.go(-1);
         }else if(res.data.code==-2){
           alert("用户名不存在，请重新输入");
         }else if(res.data.code==-3){
