@@ -39,13 +39,13 @@
     </router-link>
     <!-- 红包金币 -->
     <div class="index-1G7HV">
-      <router-link to="/profile/benefit" class="index-1ryAh">
+      <a @click="tobenefit" class="index-1ryAh">
         <p>
           <span class="index-2FmrF" style="color: rgb(255, 95, 62);">0</span>
           <span class="index-2V-Hh" style="color: rgb(255, 95, 62);">个</span>
         </p>
         <p class="index-3S6cZ">红包</p>
-      </router-link>
+      </a>
       <a href="https://activity.m.duiba.com.cn/chome/index#/chome/index" class="index-1ryAh">
         <p>
           <span class="index-2FmrF" style="color: rgb(106, 194, 11);">0</span>
@@ -56,12 +56,12 @@
     </div>
     <!-- 我的地址 -->
     <section class="profile-1reTe">
-      <a href="#" class="index-2MEEn">
+      <a @click="toadress" class="index-2MEEn">
         <i class="iconfont icon-dizhi" style="color:rgb(74, 165, 240);"></i>
-        <router-link to="/profile/address" class="index-yydpu">
+        <a class="index-yydpu">
           我的地址
           <i class="iconfont icon-right"></i>
-        </router-link>
+        </a>
       </a>
     </section>
     <!-- 金币商城 -->
@@ -159,6 +159,24 @@ export default {
           this.username = "";
           this.phone = "";
         }
+      }
+    },
+    //点击我的优惠
+    tobenefit () {
+      this.isLogin();
+      if (this.username == "") {
+        this.$router.push("/login");
+      } else {
+        this.$router.push("/profile/benefit");
+      }
+    },
+    //点击我的地址
+    toadress () {
+      this.isLogin();
+      if (this.username == "") {
+        this.$router.push("/login");
+      } else {
+        this.$router.push("/profile/address");
       }
     },
     //点击分享拿10元现金

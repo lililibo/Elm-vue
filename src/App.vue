@@ -1,5 +1,5 @@
 <template>
-  <keep-alive exclude="login,register">
+  <keep-alive exclude="login,register,detail">
     <router-view></router-view>
   </keep-alive>
 </template>
