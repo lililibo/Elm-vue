@@ -179,7 +179,7 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 .detail .header{
   width: 100%;

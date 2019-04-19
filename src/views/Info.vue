@@ -18,13 +18,13 @@
             <i class="iconfont icon-right"></i>
           </span>
         </li>
-        <li class="main-3Idiu">
+        <router-link to="/profile/info/username" class="main-3Idiu" tag="li">
           <b>用户名</b>
           <span class="main-2cJz_">
             {{username}}
             <i class="iconfont icon-right"></i>
           </span>
-        </li>
+        </router-link>
       </ul>
       <h2 class="main-1OkSR">账号绑定</h2>
       <ul class="main-22cQX">
@@ -97,14 +97,18 @@ export default {
         processData: false, // 上传文件，需要将这个选项设置为false
         contentType: false, // 上传文件，需要将这个选项设置为false
         success: function(res) {
-          console.log(res)
+          console.log(res);
           if (res.code === 0) {
             alert("修改成功");
-           _this.avator="http://localhost:3000/"+res.avator;
-           localStorage.setItem("avator",_this.avator);
+            _this.avator = "http://localhost:3000/" + res.avator;
+            localStorage.setItem("avator", _this.avator);
           }
         }
       });
+    },
+    //修改用户名
+    changeUname: function(){
+
     },
     //退出登陆
     logOut: function() {
@@ -112,10 +116,19 @@ export default {
       localStorage.removeItem("phone");
       localStorage.removeItem("password");
       this.$router.push("/profile");
+    },
+    //检查头像用户是否修改过
+    getAvator: function() {
+      if (localStorage) {
+        if (localStorage.getItem("avator")) {
+          this.avator = localStorage.getItem("avator");
+        }
+      }
     }
   },
   activated() {
     this.isLogin();
+    this.getAvator();
   }
 };
 </script>
