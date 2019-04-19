@@ -1,8 +1,8 @@
 <template>
   <div>
     <van-collapse v-model="activeNames">
-      <van-collapse-item title="营业资质" class="sd" disabled right-icon='false'></van-collapse-item>
-      <van-collapse-item title="服务承诺" name="2" disabled></van-collapse-item>
+      <van-cell title="营业资质"/>
+      <van-cell title="服务承诺"/>
       <van-collapse-item title="公示栏" name="3">
         <ul class="listbox">
           <li class="Tree-2xyeO">
