@@ -6,30 +6,52 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
       chosenAddressId: "1",
-      list: [
-        {
-          id: "1",
-          name: "张三",
-          tel: "13000000000",
-          address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室"
-        },
-        {
-          id: "2",
-          name: "李四",
-          tel: "1310000000",
-          address: "浙江省杭州市拱墅区莫干山路 50 号"
-        }
-      ]
+      username:'',
+      list:[]
     };
   },
 
   methods: {
+    //获取地址
+    getaddressList:function(){
+      if (localStorage) {
+        if (localStorage.getItem("username")) {
+          var username = localStorage.getItem("username");
+          var _this = this;
+          //对username进行验证
+          axios
+            .get("http://localhost:3000/users/usernameyz", {
+              params: {
+                username: username
+              }
+            })
+            .then(function(res) {
+              //console.log(res.data);
+              if (res.data.code == 0) {
+                _this.username = res.data.username;
+                _this.list=res.data.address;
+                console.log(_this.list)
+              } else if (res.data.code == -1) {
+                //console.log(res.data.msg);
+                _this.username = "";
+              }
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        } else {
+          this.username = "";
+          this.phone = "";
+        }
+      }
+    },
     onAdd() {
-      alert(1);
+      this.$router.push("/profile/address/add");
     },
 
     onEdit() {
@@ -39,7 +61,10 @@ export default {
     onClickLeft() {
       this.$router.go(-1)
     }
-  }
+  },
+  activated() {
+    this.getaddressList();
+  },
 };
 </script>
 
