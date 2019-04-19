@@ -35,7 +35,7 @@ export default {
               if (res.data.code == 0) {
                 _this.username = res.data.username;
                 _this.list=res.data.address;
-                console.log(_this.list)
+                //console.log(_this.list)
               } else if (res.data.code == -1) {
                 //console.log(res.data.msg);
                 _this.username = "";
@@ -59,7 +59,7 @@ export default {
     },
 
     onClickLeft() {
-      this.$router.go(-1)
+      this.$router.push("/profile");
     }
   },
   activated() {
@@ -68,7 +68,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .van-nav-bar{
   background: #009fff;
 }

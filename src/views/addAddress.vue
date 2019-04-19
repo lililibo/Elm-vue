@@ -1,9 +1,9 @@
 <template>
   <div>
+    <van-nav-bar title="添加地址" left-text left-arrow @click-left="onClickLeft"/>
     <van-address-edit
       :area-list="areaList"
       show-postal
-      show-delete
       show-set-default
       show-search-result
       :search-result="searchResult"
@@ -62,7 +62,7 @@ export default {
               //console.log(res.data);
               if (res.data.code == 0) {
                 _this.username = res.data.username;
-                _this.list=res.data.address;
+                _this.list = res.data.address;
               } else if (res.data.code == -1) {
                 //console.log(res.data.msg);
                 _this.username = "";
@@ -80,7 +80,7 @@ export default {
     //保存地址
     onSave(e) {
       let data = {};
-      data.id=this.list.length+1;
+      data.id = this.list.length + 1;
       data.name = e.name;
       data.tel = e.tel;
       data.address = e.province + e.city + e.county + e.addressDetail + "";
@@ -89,21 +89,24 @@ export default {
       data.postalCode = e.postalCode;
       data.isDefault = e.isDefault;
       this.list.push(data);
-      var _this=this;
-      axios.post("http://localhost:3000/users/addaddress",{
-        username:this.username,
-        list:this.list
-      }).then(function(res){
-        //console.log(res.data);
-        if(res.data.code==0){
-          alert("地址添加成功");
-          _this.$router.push("/profile/address");
-        }else{
-          alert(res.data.msg);
-        }
-      }).catch(function(err){
-        console.log(err);
-      })
+      var _this = this;
+      axios
+        .post("http://localhost:3000/users/addaddress", {
+          username: this.username,
+          list: this.list
+        })
+        .then(function(res) {
+          //console.log(res.data);
+          if (res.data.code == 0) {
+            alert("地址添加成功");
+            _this.$router.push("/profile/address");
+          } else {
+            alert(res.data.msg);
+          }
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     },
     onDelete() {
       alert(2);
@@ -119,6 +122,10 @@ export default {
       } else {
         this.searchResult = [];
       }
+    },
+    //点击返回
+    onClickLeft() {
+      this.$router.push("/profile/address");
     }
   },
   activated() {
@@ -126,4 +133,3 @@ export default {
   }
 };
 </script>
-
