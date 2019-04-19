@@ -165,6 +165,9 @@ export default {
 };
 </script>
 <style>
+body{
+  height: 100%;
+}
 .van-card__footer {
   padding-top: 0.3rem;
 }
@@ -176,9 +179,20 @@ export default {
   justify-content: space-between;
 }
 
+.detail{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.detail .header{
+  width: 100%;
+}
 .detail .header_t {
   position: relative;
-  background: url("//fuss10.elemecdn.com/7/63/06a2d3a322b4da10ec394e5ee79cbpng.png?imageMogr/format/webp/thumbnail/750x/thumbnail/!40p/blur/50x40/");
+  height: 1rem;
+  background: url("//fuss10.elemecdn.com/7/63/06a2d3a322b4da10ec394e5ee79cbpng.png?imageMogr/format/webp/thumbnail/750x/thumbnail/!40p/blur/50x40/") ;
   background-size: 100%;
   margin-bottom: 0.26rem;
 }
@@ -194,7 +208,7 @@ export default {
   box-shadow: 0 0 0.4vw 0 rgba(0, 0, 0, 0.2);
   position: absolute;
   top: 0.42rem;
-  left: 1.5rem;
+  left: 1.4rem;
 }
 .detail .header_b {
   padding: 0 0.38rem 0;
@@ -226,8 +240,10 @@ export default {
 }
 .detail .banner {
   height: 0.4rem;
+  width: 100%;
   padding: 0 0.48rem 0;
-  margin-top: 0.24rem;
+  margin-top: 0.14rem;
+  margin-bottom: .1rem;
 }
 .detail .banner ul {
   display: flex;
