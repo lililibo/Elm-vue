@@ -100,7 +100,10 @@ router.get("/usernameyz", function (req, res, next) {
         console.log("用户名存在");
         res.send({
           code: 0,
-          msg: "用户名存在"
+          msg: "用户名存在",
+          avator:data.avator,
+          username:data.username,
+          phone:data.phone,
         })
       } else {
         console.log("用户名不存在");

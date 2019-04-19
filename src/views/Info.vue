@@ -56,6 +56,7 @@
 
 <script>
 import $ from "jquery";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -70,14 +71,39 @@ export default {
       if (localStorage) {
         if (localStorage.getItem("username")) {
           var username = localStorage.getItem("username");
-          this.username = username;
-        }
-        if (localStorage.getItem("phone")) {
-          var phone = localStorage.getItem("phone");
-          //隐藏电话号码的中间4位
-          var myphone = phone.substr(3, 4);
-          var lphone = phone.replace(myphone, "****");
-          this.phone = lphone;
+          var _this = this;
+          //对username进行验证
+          axios
+            .get("http://localhost:3000/users/usernameyz", {
+              params: {
+                username: username
+              }
+            })
+            .then(function(res) {
+              //console.log(res.data);
+              if (res.data.code == 0) {
+                _this.username = username;
+                var phone = localStorage.getItem("phone");
+                //隐藏电话号码的中间4位
+                var myphone = phone.substr(3, 4);
+                var lphone = phone.replace(myphone, "****");
+                _this.phone = lphone;
+                //如果头像有修改
+                if (res.data.avator != "images/avator.png") {
+                  _this.avator = "http://localhost:3000/" + res.data.avator;
+                }
+              } else if (res.data.code == -1) {
+                //console.log(res.data.msg);
+                _this.username = "";
+                _this.phone = "";
+              }
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        } else {
+          this.username = "";
+          this.phone = "";
         }
       }
     },
@@ -101,15 +127,12 @@ export default {
           if (res.code === 0) {
             alert("修改成功");
             _this.avator = "http://localhost:3000/" + res.avator;
-            localStorage.setItem("avator", _this.avator);
           }
         }
       });
     },
     //修改用户名
-    changeUname: function(){
-
-    },
+    changeUname: function() {},
     //退出登陆
     logOut: function() {
       localStorage.removeItem("username");
