@@ -191,7 +191,7 @@ export default {
 </script>
 
 
-<style>
+<style scope>
 /* 商家列表 */
 .lblist_b {
   height: 3.15rem;
