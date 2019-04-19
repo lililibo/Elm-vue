@@ -90,13 +90,13 @@
           <i class="iconfont icon-right"></i>
         </div>
       </a>
-      <a href="#" class="index-2MEEn">
+      <router-link to="/service/dowlond" class="index-2MEEn">
         <i class="iconfont icon-eliaomo" style="color:rgb(74, 165, 240)"></i>
         <div class="index-yydpu">
           下载饿了么APP
           <i class="iconfont icon-right"></i>
         </div>
-      </a>
+      </router-link>
       <router-link to="/service/agreement" class="index-2MEEn">
         <i class="iconfont icon-guize" style="color:rgb(74, 165, 240)"></i>
         <div class="index-yydpu">

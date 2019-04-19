@@ -22,12 +22,13 @@ export default new VueRouter({
         {
           path: 'city', component: () => import('./views/city.vue')
         },
-        {
-          path: 'service', component: () => import('./components/service.vue'),children: [
-            { path: 'agreement', component: () => import('./components/agreement.vue') }
-          ]
-        },
         { path: '', redirect: '/me' }
+      ]
+    },
+    {
+      path: '/service', component: () => import('./components/service.vue'),children: [
+        { path: 'agreement', component: () => import('./components/agreement.vue') },
+        { path: 'dowlond', component: () => import('./components/dowlond.vue') }
       ]
     },
     {

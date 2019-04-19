@@ -96,11 +96,18 @@ export default {
       total: 56
     };
   },
+  deactivated() {
+    console.log(1)
+    this.$destroy(true)
+  },
   computed: {
     //计算页数
     getPageNum: function() {
       return Math.ceil(this.total / this.pageSize);
     }
+  },
+  activated() {
+    this.getShopList()
   },
   methods: {
     getShopList: function() {
@@ -108,8 +115,8 @@ export default {
       axios
         .get("https://elm.cangdu.org/shopping/restaurants", {
           params: {
-            latitude: 22.547,
-            longitude: 114.085947,
+            latitude: _this.$store.state.geography.x,
+            longitude: _this.$store.state.geography.y,
             offset: 0,
             limit: this.pageSize,
             order_by: this.order_by
@@ -117,14 +124,15 @@ export default {
         })
         .then(function(res) {
           _this.shopList = res.data;
-          //console.log(res.data);
+          return res.data;
+          console.log(res.data);
         })
         .catch(function(err) {
           alert(err);
         });
     },
-    setid:function(shopid){
-      this.$store.commit('setshopid',shopid)
+    setid: function(shopid) {
+      this.$store.commit("setshopid", shopid);
     },
     //把商家id传入vuex
     juli: function() {
@@ -166,7 +174,6 @@ export default {
         if (scrollTop + windowHeight >= scrollHeight) {
           //写后台加载数据的函数
           if (_this.sw < _this.pageNum) {
-
             _this.pageSize = _this.pageSize + 8;
             _this.getShopList();
             _this.sw++;
