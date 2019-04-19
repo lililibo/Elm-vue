@@ -224,6 +224,57 @@ router.post("/addaddress",function(req,res,next){
   })
 })
 
+//检验密码是否正确http://localhost:3000/users/checkpsw
+router.post("/checkpsw",function(req,res,next){
+  //console.log(req.body);
+  usermodel.findOne({
+    username:req.body.username
+  }).then(function(data){
+    //console.log(data);
+    if(data){
+      if(data.password==req.body.psw){
+        console.log("密码匹配");
+        res.send({
+          code:0,
+          msg:"密码匹配"
+        })
+      }else{
+        console.log("密码不正确");
+        res.send({
+          code:-1,
+          msg:"密码不正确"
+        })
+      }
+    }
+  }).catch(function(err){
+    console.log(err);
+  })
+})
+//修改密码http://localhost:3000/users/changepsw
+router.post("/changepsw",function(req,res,next){
+  //console.log(req.body);
+  usermodel.updateOne({
+    username:req.body.username
+  },{
+    password:req.body.password
+  }).then(function(data){
+    //console.log(data);
+    if(data.nModified==1){
+      console.log("修改密码成功");
+      res.send({
+        code:0,
+        msg:"修改密码成功"
+      })
+    }else{
+      res.send({
+        code:-1,
+        msg:"修改密码不成功"
+      })
+    }
+  }).catch(function(err){
+    console.log(err);
+  })
+})
 
 module.exports = router;
 

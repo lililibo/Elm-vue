@@ -41,13 +41,13 @@
       </ul>
       <h2 class="main-1OkSR">安全设置</h2>
       <ul class="main-22cQX">
-        <li class="main-3Idiu">
+        <router-link :to="{name:'updatepsw',params:{username:this.username}}" class="main-3Idiu">
           <span>登陆密码</span>
           <span>
             <span class="main-2cJz_" style="color:#0097ff;">修改</span>
             <i class="iconfont icon-right"></i>
           </span>
-        </li>
+        </router-link>
       </ul>
       <button class="main-aGw6s" @click="logOut">退出登陆</button>
     </div>

@@ -56,6 +56,9 @@ export default new VueRouter({
       path: '/profile/info/username', component: () => import('./views/Username.vue'),meta:{title:'账户信息'},
     },
     {
+      path: '/profile/info/updatepsw',name:'updatepsw', component: () => import('./views/Updatepsw.vue'),meta:{title:'账户信息'},
+    },
+    {
       path: '/shop/:id', name: 'detail', component: () => import('./views/Detail.vue')
     },
     {
