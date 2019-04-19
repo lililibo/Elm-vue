@@ -7,7 +7,7 @@
           <i @click="tome" class="iconfont icon-fanhui"></i>
         </a>
         <img
-          src="//fuss10.elemecdn.com/7/63/06a2d3a322b4da10ec394e5ee79cbpng.png?imageMogr/format/webp/thumbnail/150x/"
+          :src="'//elm.cangdu.org/img/'+goodsdata.image_path"
         >
       </div>
       <div class="header_b">
@@ -48,8 +48,8 @@
     <div class="shangpin">
       <div class="shangpinl">
         <ul>
-          <li class="shangpinl_active" v-for="litem in labtitle" :key="litem.id">
-            <a href="#">
+          <li class="shangpinl_active" v-for="litem in labtitle" :key="litem.id" @click="setindex(litem)">
+            <a>
               <i class="iconfont icon-youhui"></i>
               {{litem.name}}
             </a>
@@ -58,27 +58,13 @@
       </div>
       <div class="shangpinr">
         <ul>
-          <li>
-            <van-card tag="标签" price="2.00" desc="描述信息" title="商品标题" :thumb="imageURL">
+          <li v-for="itemlist in goodslist" :key="itemlist.item_id">
+            <van-card :key="1" tag="标签" :price="2.00" :desc="itemlist.description" :title='itemlist.name' :thumb="'//elm.cangdu.org/img/'+itemlist.image_path">
               <div slot="footer">
                 <van-button size="mini">-</van-button>
                 <van-button size="mini">+</van-button>
               </div>
             </van-card>
-
-            <!-- <img src="//fuss10.elemecdn.com/6/a6/07780287ee18bf351cfa48f02b637jpeg.jpeg?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/" />
-							<div class="shangpinr1">
-								<div class="shangpinr11">
-									大脸鸡排+饮品
-								</div>
-								<div class="shangpinr12">
-									7.8折起
-								</div>
-								<div class="shangpinr13">
-									￥19.5起
-								</div>
-							</div>
-            <button>+</button>-->
           </li>
         </ul>
       </div>
@@ -116,20 +102,25 @@ export default {
       sid: "",
       labtitle: {},
       goodsdata: {},
-      imageURL:
-				"//fuss10.elemecdn.com/6/a6/07780287ee18bf351cfa48f02b637jpeg.jpeg?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/"
-			
+      goodslist:{}
     }
   },
   computed: {
     setname() {
       return this.goodsdata.name;
+    },
+    newgoods(){
+      return this.goodslist;
     }
   },
   methods: {
     //编程式导航回首页
     tome() {
       this.$router.go(-1);
+    },
+    setindex(eltem){
+      this.goodslist=eltem.foods
+      console.log(this.goodslist)
     },
     undataid() {
       this.uid = this.$router.history.current.params.id;
@@ -143,24 +134,28 @@ export default {
         }
       }).then(res => {
         this.labtitle = res.data;
-        console.log(res.data);
+        if(this.goodslist=res.data[1].foods){
+          this.goodslist=res.data[1].foods
+        }
+
+        console.log(1,res.data)
       });
     },
     newshopdata() {
-      let url = "https://elm.cangdu.org/shopping/restaurant/" + this.uid;
+      let url = "//elm.cangdu.org/shopping/restaurant/" + this.uid;
       Axios.get(url, {
         query: {
           restaurant_id: this.uid
         }
       }).then(res => {
+        console.log(res.data)
         this.goodsdata = res.data;
-        console.log(this.goodsdata);
+
       });
-      console.log(url);
     }
   },
   activated() {
-    this.undataid(), this.getshopdata(), this.newshopdata();
+    this.undataid(), this.getshopdata(),this.newshopdata();
   }
 };
 </script>
