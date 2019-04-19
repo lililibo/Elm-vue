@@ -90,13 +90,13 @@
           <i class="iconfont icon-right"></i>
         </div>
       </a>
-      <a href="#" class="index-2MEEn">
+      <router-link to="/service/dowlond" class="index-2MEEn">
         <i class="iconfont icon-eliaomo" style="color:rgb(74, 165, 240)"></i>
         <div class="index-yydpu">
           下载饿了么APP
           <i class="iconfont icon-right"></i>
         </div>
-      </a>
+      </router-link>
       <router-link to="/service/agreement" class="index-2MEEn">
         <i class="iconfont icon-guize" style="color:rgb(74, 165, 240)"></i>
         <div class="index-yydpu">
@@ -160,9 +160,6 @@ export default {
         }
       }
     },
-<<<<<<< HEAD
-
-=======
     //点击分享拿10元现金
     commend: function() {
       this.isLogin();
@@ -181,7 +178,6 @@ export default {
         this.$router.push("/mservice");
       }
     }
->>>>>>> 0072ac2fa08fd81c88e9cabb1d24cd602460a43e
   },
   activated() {
     this.isLogin();
