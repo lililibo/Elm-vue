@@ -10,7 +10,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      chosenAddressId: "1",
+      chosenAddressId: '',
       username:'',
       list:[]
     };
@@ -36,6 +36,12 @@ export default {
                 _this.username = res.data.username;
                 _this.list=res.data.address;
                 //console.log(_this.list)
+                //获取默认地址
+                _this.list.filter(item => {
+                  if(item.isDefault==true){
+                    _this.chosenAddressId=item.id;
+                  }
+                });
               } else if (res.data.code == -1) {
                 //console.log(res.data.msg);
                 _this.username = "";
