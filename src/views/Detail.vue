@@ -7,23 +7,23 @@
           <a>
             <i @click="tome" class="iconfont icon-fanhui"></i>
           </a>
-          <img :src="'//elm.cangdu.org/img/'+goodsdata.image_path">
+          <img :src="'//elm.cangdu.org/img/'+sellerdata.image_path">
         </div>
         <div class="header_b">
           <div class="header_b1">
-            {{setname}}
+            {{ sellerdata.name }}
             <i class="iconfont icon-sanjiaoright"></i>
           </div>
           <div class="header_b2">
-            <span>评价5.0</span>
-            <span>月售40单</span>
-            <span>蜂鸟快送</span>
-            <span>约40分钟</span>
+            <span>评价： {{ sellerdata.rating }}</span>
+            <span> 月售{{sellerdata.recent_order_num}}单 </span>
+            <span> 蜂鸟专送</span>
+            <span> {{ sellerdata.order_lead_time}}</span>
           </div>
           <div class="header_b3">
             <div class="header_b31">
               <span>满减</span>
-              <span>满10减5，满25减8，满40减15</span>
+              <span>: 满10减5，满25减8，满40减15</span>
             </div>
             <div class="header_b32">
               <span>
@@ -32,7 +32,7 @@
               </span>
             </div>
           </div>
-          <div class="header_b4">公告：欢迎光临，用餐高峰期请提前下单，谢谢。</div>
+          <div class="header_b4">公告：{{ sellerdata.promotion_info }}。</div>
         </div>
       </div>
       <!--导航-->
@@ -45,21 +45,25 @@
       </div>
       <!--商品-->
       <div class="shangpin">
+        <!-- 商品分类列表 -->
         <div class="shangpinl">
           <ul>
             <li
               class="shangpinl_active"
-              v-for="litem in labtitle"
-              :key="litem.id"
-              @click="setindex(litem)"
+              v-for="(item,index) in goodsdata"
+              :key="index"
+              @click="setindex(item)"
             >
               <a>
                 <i class="iconfont icon-youhui"></i>
-                {{litem.name}}
+                {{item.name}}
               </a>
             </li>
           </ul>
         </div>
+
+
+        <!-- 商品列表 -->
         <div class="shangpinr">
           <ul class="goodsui">
             <li v-for="itemlist in goodslist" :key="itemlist.item_id">
@@ -81,6 +85,8 @@
         </div>
       </div>
     </div>
+
+
     <!--底部-->
     <div class="footer">
       <van-goods-action-mini-btn icon="cart-o" text="购物车" :info="5" @click="show = !show"/>
@@ -100,61 +106,44 @@ export default {
       //商家名称
       uid: 1,
       sid: "",
-      labtitle: {},
-      goodsdata: {},
-      goodslist: {}
+      goodsdata: [],
+      sellerdata: {},
+      goodslist: []
     };
-  },
-  computed: {
-    setname() {
-      return this.goodsdata.name;
-    },
-    newgoods() {
-      return this.goodslist;
-    }
   },
   methods: {
     //编程式导航回首页
     tome() {
       this.$router.go(-1);
     },
+    //点击获取商品分类信息
     setindex(eltem) {
       this.goodslist = eltem.foods;
-      console.log(this.goodslist);
     },
+    //得到商铺id
     undataid() {
       this.uid = this.$router.history.current.params.id;
     },
+    //得到商品分类信息
     getshopdata() {
-      let url =
-        "https://elm.cangdu.org/shopping/v2/menu?restaurant_id=" + this.uid;
-      Axios.get(url, {
-        query: {
+      Axios.get("https://elm.cangdu.org/shopping/v2/menu", {
+        params: {
           restaurant_id: this.uid
         }
       }).then(res => {
-        this.labtitle = res.data;
-        if ((this.goodslist = res.data[1].foods)) {
-          this.goodslist = res.data[1].foods;
-        }
-
-        console.log(1, res.data);
-      });
+        this.goodsdata = res.data
+        this.goodslist = res.data[0].foods
+      })
     },
+    //得到商铺信息
     newshopdata() {
-      let url = "//elm.cangdu.org/shopping/restaurant/" + this.uid;
-      Axios.get(url, {
-        query: {
-          restaurant_id: this.uid
-        }
-      }).then(res => {
-        console.log(res.data);
-        this.goodsdata = res.data;
-      });
+      Axios.get("https://elm.cangdu.org/shopping/restaurant/" + this.uid ).then(res => {
+        this.sellerdata = res.data
+      })
     }
   },
   activated() {
-    this.undataid(), this.getshopdata(), this.newshopdata();
+     this.undataid(), this.getshopdata(), this.newshopdata()
   }
 };
 </script>
