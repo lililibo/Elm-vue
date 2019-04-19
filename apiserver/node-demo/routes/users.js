@@ -139,12 +139,12 @@ router.post("/updateAvator", upload.single("avator"), function (req, res, next) 
     }, {
         avator: newFileName,
       }).then(data => {
-        console.log(data);
+        //console.log(newFileName);
         if (data.nModified == 1) {
           res.send({
             code: 0,
             msg: '上传成功',
-            avator: finddata.avator
+            avator: newFileName
           });
         }
       }).catch(err => {

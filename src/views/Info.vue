@@ -97,11 +97,11 @@ export default {
         processData: false, // 上传文件，需要将这个选项设置为false
         contentType: false, // 上传文件，需要将这个选项设置为false
         success: function(res) {
-          console.log(res)
+          console.log(res);
           if (res.code === 0) {
             alert("修改成功");
-           _this.avator="http://localhost:3000/"+res.avator;
-           localStorage.setItem("avator",_this.avator);
+            _this.avator = "http://localhost:3000/" + res.avator;
+            localStorage.setItem("avator", _this.avator);
           }
         }
       });
@@ -112,10 +112,19 @@ export default {
       localStorage.removeItem("phone");
       localStorage.removeItem("password");
       this.$router.push("/profile");
+    },
+    //检查头像用户是否修改过
+    getAvator: function() {
+      if (localStorage) {
+        if (localStorage.getItem("avator")) {
+          this.avator = localStorage.getItem("avator");
+        }
+      }
     }
   },
   activated() {
     this.isLogin();
+    this.getAvator();
   }
 };
 </script>
